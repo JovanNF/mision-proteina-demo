@@ -64,7 +64,7 @@ window.GAME_LEVELS = [
     },
     locked: true,
     hints: [
-      "Los intrones contienen señales de corte no codificantes que deben retirarse. Solo los exones formarán la proteína final.",
+      "Los intrones son secuencias escindidas que no se conservan en el ARNm maduro. Los exones permanecen en el ARNm procesado, aunque este incluye tanto la región codificante (CDS) como las regiones no traducidas 5' UTR y 3' UTR.",
       "El Cap 5' protege contra exonucleasas y es esencial para el reconocimiento del ribosoma."
     ]
   },
@@ -112,12 +112,12 @@ window.GAME_LEVELS = [
     shortTitle: "Caso Clínico Genético",
     subtitle: "Identificación de Mutaciones y Fisiopatología",
     statusBadge: "Fase 05 · Diagnóstico Clínico",
-    description: "Compara el ADN del paciente frente a la secuencia control, localiza la mutación puntual, deduce el cambio en el codón del ARNm y fundamenta por qué la proteína truncada causa patología.",
+    description: "Compara el ADN del paciente frente a la secuencia control, localiza la mutación puntual, deduce el cambio generado en el codón del ARNm (mutación sin sentido) y analiza las posibles repercusiones moleculares de un codón de terminación prematuro.",
     maxScore: 100,
     scientificBrief: {
       location: "Laboratorio de Genética Médica y Diagnóstico Molecular",
       machinery: "Secuenciación de ADN + Análisis Bioinformático de Marcos de Lectura",
-      mechanism: "Una mutación en la cadena codificante (5'-ATG GAA CCT TAA-3' → 5'-ATG TAA CCT TAA-3') altera el codón 2 en el ARNm de GAA (Glutamato) a UAA (Stop prematuro). Esta mutación sin sentido (nonsense) genera un péptido no funcional y degradación por NMD."
+      mechanism: "Una mutación en la cadena codificante (5'-ATG GAA CCT TAA-3' → 5'-ATG TAA CCT TAA-3') altera el codón 2 en el ARNm de GAA (Glutamato) a UAA, introduciendo un codón de terminación prematuro (mutación sin sentido o nonsense). Las consecuencias celulares dependerán del contexto biológico y la posición del transcrito: puede inducir degradación por decaimiento mediado por mutaciones sin sentido (NMD) o dar lugar a un polipéptido truncado con pérdida de función, efecto dominante negativo o inestabilidad estructural."
     },
     locked: true,
     hints: [

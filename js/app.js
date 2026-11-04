@@ -85,6 +85,10 @@ class AppController {
         "<p>¿Deseas reiniciar todo el progreso y las puntuaciones almacenadas en el laboratorio?</p>",
         "Sí, reiniciar",
         () => {
+          if (this.activeLevelInstance) {
+            this.activeLevelInstance.unmount();
+            this.activeLevelInstance = null;
+          }
           window.gameState.resetProgress();
           this.switchView('screenHome');
         }
@@ -142,9 +146,22 @@ class AppController {
       this.closeModal();
       if (cb) cb();
     });
+
+    // Tecla Escape para cerrar modales
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.isModalOpen()) {
+        e.preventDefault();
+        this.closeModal();
+      }
+    });
   }
 
   switchView(viewId) {
+    // Si salimos del gameplay a otra pantalla, desmontar nivel activo limpiando listeners
+    if (viewId !== 'screenGameplay' && this.activeLevelInstance) {
+      this.activeLevelInstance.unmount();
+      this.activeLevelInstance = null;
+    }
     Object.keys(this.screens).forEach(key => {
       const el = this.screens[key];
       if (el) {
@@ -343,6 +360,10 @@ class AppController {
   closeModal() {
     this.modal.classList.add('hidden');
     this.modalCallback = null;
+  }
+
+  isModalOpen() {
+    return this.modal && !this.modal.classList.contains('hidden');
   }
 }
 

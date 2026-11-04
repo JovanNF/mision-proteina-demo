@@ -22,25 +22,44 @@ class Level1Controller {
 
     this.container = null;
     this._keyboardHandler = this._handleKeyboard.bind(this);
-    this._scrollHandler = null;
+    this._resizeHandler = null;
+    this._isWindowEventsAttached = false;
   }
 
   mount(stageElement) {
     this.container = stageElement;
     this.render();
-    this.attachEvents();
+    this._bindContainerEvents();
+    this._attachWindowEvents();
   }
 
   unmount() {
-    window.removeEventListener('keydown', this._keyboardHandler);
-    if (this._scrollHandler) {
-      window.removeEventListener('resize', this._scrollHandler);
-      const rig = this.container ? this.container.querySelector('#transcriptionRig') : null;
-      if (rig) rig.removeEventListener('scroll', this._scrollHandler);
-    }
+    this._detachWindowEvents();
     if (this.container) {
       this.container.innerHTML = '';
+      this.container = null;
     }
+  }
+
+  _attachWindowEvents() {
+    if (this._isWindowEventsAttached) return;
+    window.addEventListener('keydown', this._keyboardHandler);
+    this._resizeHandler = () => {
+      const rig = this.container ? this.container.querySelector('#transcriptionRig') : null;
+      if (rig) this._updateScrollIndicators(rig);
+    };
+    window.addEventListener('resize', this._resizeHandler, { passive: true });
+    this._isWindowEventsAttached = true;
+  }
+
+  _detachWindowEvents() {
+    if (!this._isWindowEventsAttached) return;
+    window.removeEventListener('keydown', this._keyboardHandler);
+    if (this._resizeHandler) {
+      window.removeEventListener('resize', this._resizeHandler);
+      this._resizeHandler = null;
+    }
+    this._isWindowEventsAttached = false;
   }
 
   render() {
@@ -177,12 +196,12 @@ class Level1Controller {
               Deshacer último (Backspace)
             </button>
 
-            <button id="btnRestartLevel" class="btn btn-outline btn-sm">
+            <button id="btnRestartLevel" class="btn btn-outline btn-sm" title="Reiniciar el nivel completo, restableciendo puntuación, errores y pistas">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M23 4v6h-6"></path>
                 <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
               </svg>
-              Reiniciar hebra
+              Reiniciar nivel
             </button>
           </div>
         </div>
@@ -242,15 +261,23 @@ class Level1Controller {
     }).join('');
   }
 
-  attachEvents() {
-    // Teclado físico
-    window.addEventListener('keydown', this._keyboardHandler);
+  _isModalOpen() {
+    if (window.app && typeof window.app.isModalOpen === 'function') {
+      return window.app.isModalOpen();
+    }
+    const modal = document.getElementById('gameModal');
+    return modal && !modal.classList.contains('hidden');
+  }
+
+  _bindContainerEvents() {
+    if (!this.container) return;
 
     // Botones de nucleótidos
     const buttons = this.container.querySelectorAll('.btn-nucleotide');
     buttons.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
+        if (this._isModalOpen()) return;
         const base = btn.getAttribute('data-base');
         this.handleBaseSelection(base, btn);
       });
@@ -259,23 +286,25 @@ class Level1Controller {
     // Deshacer
     const btnUndo = this.container.querySelector('#btnUndoBase');
     if (btnUndo) {
-      btnUndo.addEventListener('click', () => this.undoLastBase());
+      btnUndo.addEventListener('click', () => {
+        if (this._isModalOpen()) return;
+        this.undoLastBase();
+      });
     }
 
     // Reiniciar
     const btnRestart = this.container.querySelector('#btnRestartLevel');
     if (btnRestart) {
-      btnRestart.addEventListener('click', () => this.restart());
+      btnRestart.addEventListener('click', () => {
+        if (this._isModalOpen()) return;
+        this.restart();
+      });
     }
 
-    // Monitoreo de scroll horizontal y resize
+    // Monitoreo de scroll horizontal en el rig
     const rig = this.container.querySelector('#transcriptionRig');
     if (rig) {
-      this._scrollHandler = () => {
-        this._updateScrollIndicators(rig);
-      };
-      rig.addEventListener('scroll', this._scrollHandler, { passive: true });
-      window.addEventListener('resize', this._scrollHandler, { passive: true });
+      rig.addEventListener('scroll', () => this._updateScrollIndicators(rig), { passive: true });
       setTimeout(() => this._updateScrollIndicators(rig), 150);
     }
   }
@@ -310,23 +339,24 @@ class Level1Controller {
 
   _handleKeyboard(e) {
     if (this.isCompleted) return;
+    if (this._isModalOpen()) return;
     const key = e.key.toUpperCase();
 
     if (key === 'A' || key === '1') {
       e.preventDefault();
-      const btn = this.container.querySelector('.btn-nucleotide[data-base="A"]');
+      const btn = this.container ? this.container.querySelector('.btn-nucleotide[data-base="A"]') : null;
       this.handleBaseSelection('A', btn);
     } else if (key === 'U' || key === '2') {
       e.preventDefault();
-      const btn = this.container.querySelector('.btn-nucleotide[data-base="U"]');
+      const btn = this.container ? this.container.querySelector('.btn-nucleotide[data-base="U"]') : null;
       this.handleBaseSelection('U', btn);
     } else if (key === 'C' || key === '3') {
       e.preventDefault();
-      const btn = this.container.querySelector('.btn-nucleotide[data-base="C"]');
+      const btn = this.container ? this.container.querySelector('.btn-nucleotide[data-base="C"]') : null;
       this.handleBaseSelection('C', btn);
     } else if (key === 'G' || key === '4') {
       e.preventDefault();
-      const btn = this.container.querySelector('.btn-nucleotide[data-base="G"]');
+      const btn = this.container ? this.container.querySelector('.btn-nucleotide[data-base="G"]') : null;
       this.handleBaseSelection('G', btn);
     } else if (key === 'T') {
       e.preventDefault();
@@ -338,6 +368,7 @@ class Level1Controller {
   }
 
   _handleIllegalThymine() {
+    if (this._isModalOpen()) return;
     this._handleErrorFeedback(
       'T',
       "¡Regla violada! El ARN NO contiene Timina (T). La ARN polimerasa utiliza exclusivamente Uracilo (U)."
@@ -346,6 +377,7 @@ class Level1Controller {
 
   handleBaseSelection(selectedBase, clickedBtn = null) {
     if (this.isCompleted) return;
+    if (this._isModalOpen()) return;
     if (this.currentPosition >= this.templateStrand.length) return;
 
     const dnaBase = this.templateStrand[this.currentPosition];
@@ -431,6 +463,7 @@ class Level1Controller {
 
   undoLastBase() {
     if (this.currentPosition === 0 || this.isCompleted) return;
+    if (this._isModalOpen()) return;
 
     this.currentPosition--;
     this.placedBases.pop();
@@ -466,15 +499,28 @@ class Level1Controller {
   }
 
   restart() {
+    if (this._isModalOpen()) return;
+
     this.currentPosition = 0;
     this.placedBases = [];
+    this.score = 100;
+    this.mistakesCount = 0;
+    this.hintsRemaining = 2;
     this.isCompleted = false;
+
     this.render();
-    this.attachEvents();
+    this._bindContainerEvents();
+
+    this._updateScoreUI();
+    this._showFeedback(
+      `Nivel reiniciado. Selecciona el ribonucleótido complementario para la primera base (ADN: 3'-<strong>${this.templateStrand[0]}</strong>).`,
+      "info"
+    );
   }
 
   giveHint() {
     if (this.hintsRemaining <= 0 || this.isCompleted) return;
+    if (this._isModalOpen()) return;
     this.hintsRemaining--;
     window.audioMgr.playHint();
     this.score = Math.max(50, this.score - 5);
