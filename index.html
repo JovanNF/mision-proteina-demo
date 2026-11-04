@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Misión Proteína: Código de Vida | Simulador de Biología Molecular</title>
+  <meta name="description" content="Videojuego educativo y simulador interactivo de biología molecular para estudiantes de Medicina. Reconstruye el dogma central y resuelve el caso clínico.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="biotech-theme">
+  <!-- Fondo Ambiental de Partículas Bioluminiscentes -->
+  <canvas id="bioAmbientCanvas" class="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- HUD Superior -->
+  <header class="hud-header" id="hudHeader">
+    <div class="hud-brand">
+      <div class="hud-logo-icon">
+        <svg viewBox="0 0 32 32" fill="none" class="dna-helix-svg" aria-hidden="true">
+          <path d="M6 4C10 8 22 8 26 4M6 28C10 24 22 24 26 28M8 10C12 13 20 13 24 10M8 22C12 19 20 19 24 22M10 16C12 16 20 16 22 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="6" cy="4" r="2.5" fill="#06b6d4"/>
+          <circle cx="26" cy="4" r="2.5" fill="#3b82f6"/>
+          <circle cx="8" cy="10" r="2.5" fill="#8b5cf6"/>
+          <circle cx="24" cy="10" r="2.5" fill="#10b981"/>
+          <circle cx="10" cy="16" r="2.5" fill="#f59e0b"/>
+          <circle cx="22" cy="16" r="2.5" fill="#f43f5e"/>
+          <circle cx="8" cy="22" r="2.5" fill="#8b5cf6"/>
+          <circle cx="24" cy="22" r="2.5" fill="#10b981"/>
+          <circle cx="6" cy="28" r="2.5" fill="#06b6d4"/>
+          <circle cx="26" cy="28" r="2.5" fill="#3b82f6"/>
+        </svg>
+      </div>
+      <div class="hud-title-wrap">
+        <span class="hud-lab-tag">LABORATORIO DE BIOLOGÍA MOLECULAR Y GENÉTICA MÉDICA</span>
+        <h1 class="hud-main-title">MISIÓN PROTEÍNA <span class="badge-version">DEMO v1.0</span></h1>
+      </div>
+    </div>
+
+    <div class="hud-stats">
+      <div class="hud-stat-item hud-stat-mission" title="Progreso de las 5 misiones">
+        <span class="hud-stat-label">MISIÓN</span>
+        <span class="hud-stat-value" id="hudCurrentMission">1 / 5</span>
+      </div>
+      <div class="hud-stat-item hud-stat-score" title="Puntuación acumulada total">
+        <span class="hud-stat-label">
+          <span class="label-full">PUNTAJE GLOBAL</span>
+          <span class="label-short">PUNTAJE</span>
+        </span>
+        <span class="hud-stat-value text-accent" id="hudTotalScore">0 <small>/ 500</small></span>
+      </div>
+    </div>
+
+    <div class="hud-controls">
+      <button id="btnAudioToggle" class="btn-icon" aria-label="Activar o desactivar sonido" title="Sonido Sintetizado (Web Audio API)">
+        <svg class="icon-sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <svg class="icon-sound-off hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+      </button>
+      <button id="btnResetProgress" class="btn-icon" aria-label="Reiniciar progreso" title="Reiniciar progreso">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="1 4 1 10 7 10"></polyline>
+          <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal de Vistas -->
+  <main class="main-container" id="appMain">
+
+    <!-- ================= PANTALLA INICIAL (HERO / HOME) ================= -->
+    <section class="screen-view active" id="screenHome">
+      <div class="hero-card glass-panel">
+        <div class="hero-badge">VERSIÓN DEMOSTRACIÓN · FASE 01 (TRANSCRIPCIÓN) DISPONIBLE</div>
+        <h2 class="hero-headline">MISIÓN PROTEÍNA</h2>
+        <p class="hero-subheadline">CÓDIGO DE VIDA</p>
+
+        <div class="hero-diagnostic-alert">
+          <div class="alert-pulse-dot"></div>
+          <div class="alert-content">
+            <strong>ALERTA DE FISIOPATOLOGÍA CELULAR:</strong>
+            Una línea celular esencial ha detenido la síntesis de una proteína enzimática clave. Se detecta un fallo en el flujo de la información genética.
+          </div>
+        </div>
+
+        <p class="hero-description">
+          Como investigador médico en formación, tu objetivo en esta <strong>demostración interactiva</strong> es ingresar al núcleo celular y reconstruir con precisión bioquímica la <strong>Fase 01: Transcripción (ADN → pre-ARNm)</strong>. Las fases posteriores (splicing, traducción, tráfico y diagnóstico) forman parte de la versión completa.
+        </p>
+
+        <div class="hero-actions">
+          <button id="btnStartGame" class="btn btn-primary btn-large glow-effect">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-svg">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            INICIAR MISIÓN CIENTÍFICA
+          </button>
+          <button id="btnOpenLevelSelector" class="btn btn-secondary btn-large">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-svg">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            PANEL DE MISIONES
+          </button>
+        </div>
+
+        <!-- Previa de las 5 fases del dogma -->
+        <div class="hero-phases-preview">
+          <div class="phase-chip done" title="Fase disponible en esta demostración">
+            <span class="phase-num">01</span>
+            <span class="phase-name">Transcripción (Demo)</span>
+          </div>
+          <div class="phase-divider">→</div>
+          <div class="phase-chip" title="Próximamente en versión completa">
+            <span class="phase-num">02</span>
+            <span class="phase-name">Maduración (Próx.)</span>
+          </div>
+          <div class="phase-divider">→</div>
+          <div class="phase-chip" title="Próximamente en versión completa">
+            <span class="phase-num">03</span>
+            <span class="phase-name">Traducción (Próx.)</span>
+          </div>
+          <div class="phase-divider">→</div>
+          <div class="phase-chip" title="Próximamente en versión completa">
+            <span class="phase-num">04</span>
+            <span class="phase-name">Tráfico RER (Próx.)</span>
+          </div>
+          <div class="phase-divider">→</div>
+          <div class="phase-chip" title="Próximamente en versión completa">
+            <span class="phase-num">05</span>
+            <span class="phase-name">Diagnóstico (Próx.)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SELECTOR DE MISIONES / NIVELES ================= -->
+    <section class="screen-view" id="screenLevelSelector">
+      <div class="section-header-bar">
+        <div>
+          <h2 class="section-title">CENTRAL DE OPERACIONES MOLECULARES</h2>
+          <p class="section-subtitle">Selecciona una fase desbloqueada para iniciar la intervención celular.</p>
+        </div>
+        <button class="btn btn-outline btn-sm btn-back-home">
+          ← Volver a Inicio
+        </button>
+      </div>
+
+      <div class="level-grid" id="levelCardsGrid">
+        <!-- Generado dinámicamente desde js/data/levels.js -->
+      </div>
+    </section>
+
+    <!-- ================= CONTENEDOR DE JUEGO (NIVEL ACTIVO) ================= -->
+    <section class="screen-view" id="screenGameplay">
+      <div class="gameplay-header glass-panel">
+        <div class="gameplay-title-group">
+          <span class="gameplay-level-badge" id="gpLevelBadge">NIVEL 1</span>
+          <h2 class="gameplay-level-title" id="gpLevelTitle">Transcripción — Descifra el ADN</h2>
+        </div>
+        <div class="gameplay-meta-group">
+          <div class="gp-score-pill">
+            <span class="gp-score-label">Puntaje Nivel:</span>
+            <span class="gp-score-val" id="gpLevelScore">100</span>
+          </div>
+          <button id="btnHintTrigger" class="btn btn-warning btn-sm" title="Solicitar pista científica">
+            💡 Pista (<span id="gpHintsRemaining">2</span>)
+          </button>
+          <button id="btnExitToSelector" class="btn btn-outline btn-sm" title="Volver al panel de misiones">
+            ✕ Salir
+          </button>
+        </div>
+      </div>
+
+      <!-- Área de simulación interactiva inyectada dinámicamente -->
+      <div class="simulation-stage" id="simulationStage">
+        <!-- Aquí se montará el módulo del nivel actual (ej. Level 1) -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= MODAL DE RETROALIMENTACIÓN / PISTAS / ÉXITO ================= -->
+  <div class="modal-backdrop hidden" id="gameModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog glass-panel" id="modalDialog">
+      <div class="modal-header">
+        <div class="modal-icon-badge" id="modalIconBadge">🧬</div>
+        <h3 class="modal-title" id="modalTitle">Informe Científico</h3>
+        <button class="modal-close-btn" id="btnModalClose" aria-label="Cerrar modal">×</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Contenido dinámico -->
+      </div>
+      <div class="modal-footer" id="modalFooter">
+        <button class="btn btn-primary" id="btnModalPrimary">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts modulares -->
+  <script src="js/audio.js"></script>
+  <script src="js/data/levels.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/components/ambientBackground.js"></script>
+  <script src="js/components/level1.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

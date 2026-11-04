@@ -1,0 +1,7 @@
+# Entorno de desarrollo local
+server.js
+tests/
+*.log
+.DS_Store
+Thumbs.db
+node_modules/
