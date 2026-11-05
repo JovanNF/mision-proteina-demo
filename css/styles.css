@@ -2110,6 +2110,122 @@ body.biotech-theme {
   animation: fadeIn 0.3s ease;
 }
 
+/* Banner de Herramienta Quirúrgica Activa */
+.active-tool-banner-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  margin-bottom: 0.85rem;
+  border-radius: var(--radius-md);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px dashed rgba(148, 163, 184, 0.3);
+  transition: all 0.25s ease;
+}
+
+.active-tool-banner-bar.is-equipped {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%);
+  border: 1.5px solid var(--accent-cyan);
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.25);
+}
+
+.active-tool-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.active-tool-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex-grow: 1;
+}
+
+.active-tool-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.active-tool-banner-bar.is-equipped .active-tool-label {
+  color: var(--accent-cyan);
+}
+
+.active-tool-title {
+  font-size: 0.92rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+.active-tool-instruction {
+  font-size: 0.78rem;
+  color: #38bdf8;
+  font-family: var(--font-main);
+}
+
+/* Barra Resumen Molecular 5' a 3' */
+.mol-strand-overview-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  margin-bottom: 0.85rem;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.overview-bar-title {
+  color: var(--accent-cyan);
+  font-weight: 800;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.overview-segments-list {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.overview-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.overview-seg.active-seg {
+  background: rgba(6, 182, 212, 0.2);
+  border-color: var(--accent-cyan);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.3);
+}
+
+.overview-seg.done-seg {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.overview-link {
+  color: var(--text-dim);
+  font-size: 0.7rem;
+}
+
 .mol-surgery-table {
   padding: 1.5rem;
   margin: 1.25rem 0;
@@ -5599,8 +5715,361 @@ body.biotech-theme {
    ========================================================================== */
 
 @media (max-width: 768px) {
+  html, body {
+    overflow-x: clip;
+    max-width: 100vw;
+  }
+  .main-container,
+  .screen-view,
+  .stage-card {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: clip;
+  }
+  .gameplay-header {
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.6rem 0.6rem;
+  }
+  .gameplay-title-group {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .gameplay-level-title {
+    max-width: 100%;
+    font-size: 0.92rem;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.3;
+  }
+
+  /* Global: briefings e instrucciones compactos */
+  .stage-briefing {
+    padding: 0.45rem 0.65rem;
+    margin-bottom: 0.5rem;
+  }
+  .stage-briefing-title {
+    font-size: 0.72rem;
+    margin-bottom: 0.15rem;
+  }
+  .stage-briefing-text {
+    font-size: 0.72rem;
+    line-height: 1.3;
+    margin: 0;
+    max-height: 2.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Banner de Herramienta Activa Sticky en Móvil */
+  .active-tool-banner-bar {
+    position: sticky;
+    top: 6px;
+    z-index: 40;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(10, 16, 30, 0.96);
+    border: 1.5px solid var(--accent-cyan);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+    padding: 0.45rem 0.75rem;
+    margin-bottom: 0.65rem;
+  }
+  .active-tool-icon {
+    font-size: 1.15rem;
+  }
+  .active-tool-label {
+    font-size: 0.58rem;
+  }
+  .active-tool-title {
+    font-size: 0.82rem;
+  }
+  .active-tool-instruction {
+    font-size: 0.72rem;
+  }
+
+  /* Steppers y barras de fases/estaciones en formato rejilla compacta de 2 columnas sin scroll horizontal */
+  .lvl2-steps-bar,
+  .lvl4-circuit-bar,
+  .lvl5-phases-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin: 0.5rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border-glass);
+    overflow-x: hidden;
+  }
+  .lvl2-step-tab,
+  .lvl4-station-tab,
+  .lvl5-phase-tab {
+    flex: 1 1 calc(50% - 0.3rem);
+    min-width: 0;
+    padding: 0.35rem 0.45rem;
+    font-size: 0.72rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lvl2-step-tab .step-num,
+  .lvl4-station-tab .step-num,
+  .lvl5-phase-tab .step-num {
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+    flex-shrink: 0;
+  }
+
+  /* Nivel 1: Transcripción */
+  .transcription-rig {
+    padding: 0.85rem 0.65rem;
+  }
+  .strand-row {
+    margin: 0.75rem 0;
+    gap: 0.35rem;
+  }
+  .strand-meta-label {
+    width: 65px;
+    padding-right: 0.25rem;
+  }
+  .strand-kind {
+    font-size: 0.62rem;
+  }
+  .strand-polarity {
+    font-size: 0.55rem;
+  }
+  .nucleotide-slot {
+    width: 34px;
+    height: 44px;
+    font-size: 0.95rem;
+  }
+  .btn-nucleotide {
+    min-height: 48px;
+    padding: 0.45rem 0.5rem;
+  }
+
+  /* Nivel 2: Mesa Quirúrgica Molecular */
+  .mol-surgery-table {
+    padding: 0.85rem 0.65rem;
+    margin: 0.75rem 0;
+  }
+  .mol-strand-overview-bar {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.68rem;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow-x: visible;
+  }
+  .overview-bar-title {
+    font-size: 0.62rem;
+  }
+  .overview-segments-list {
+    gap: 0.15rem;
+    flex-wrap: wrap;
+    min-width: 0;
+    width: 100%;
+  }
+  .overview-seg {
+    padding: 0.1rem 0.3rem;
+    font-size: 0.65rem;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .overview-link {
+    font-size: 0.6rem;
+  }
+  .surgery-op-header {
+    margin-bottom: 0.65rem;
+  }
+  .surgery-badge {
+    font-size: 0.62rem;
+    padding: 0.15rem 0.45rem;
+    margin-bottom: 0.25rem;
+  }
+  .surgery-title {
+    font-size: 0.98rem;
+    margin: 0.15rem 0 0.35rem;
+  }
+  .surgery-instruction {
+    font-size: 0.78rem;
+    line-height: 1.35;
+    padding: 0.4rem 0.65rem;
+  }
+  .macromolecule-viewport {
+    overflow-x: hidden;
+    padding: 0.75rem 0.5rem;
+    margin: 0.75rem 0;
+  }
+  .macromolecule-chain {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+    gap: 0.5rem;
+    padding: 0;
+  }
+  .mol-node-terminal {
+    width: 100%;
+    min-width: 0;
+    min-height: 52px;
+    box-sizing: border-box;
+  }
+  .mol-strand-segment {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.45rem 0.85rem;
+  }
+  .segment-bases {
+    font-size: 0.95rem;
+  }
+  .mol-intron-surgery-zone {
+    width: 100%;
+    min-width: 0;
+    padding: 0.75rem 0.6rem;
+    box-sizing: border-box;
+  }
+  .intron-active-elements {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.45rem;
+  }
+  .mol-consensus-target {
+    width: 100%;
+    min-width: 0;
+    min-height: 52px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .intron-connecting-strand {
+    text-align: center;
+    padding: 0.15rem 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+  }
+  .acceptor-static-node {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.45rem 0.85rem;
+  }
+  .mutant-strand-inspection .macromolecule-chain {
+    flex-direction: column;
+    width: 100%;
+  }
+  .aberrant-verdict-btn {
+    width: 100%;
+    min-height: 54px;
+    box-sizing: border-box;
+  }
+  .btn-branch-nucleophile {
+    width: 100%;
+    min-height: 52px;
+    box-sizing: border-box;
+  }
+  .donor-phospho-target {
+    width: 100%;
+    min-height: 48px;
+    box-sizing: border-box;
+  }
+  .nucleophilic-attack-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .nucleophilic-reaction-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .lariat-acceptor-tip {
+    width: 100%;
+    min-height: 52px;
+    box-sizing: border-box;
+  }
+  .mol-cleavage-locus {
+    width: 100%;
+    min-height: 50px;
+    box-sizing: border-box;
+  }
+  .pap-injector-console {
+    padding: 0.75rem 0.5rem;
+  }
+  #btnPulsePAPDirect {
+    width: 100%;
+    min-height: 52px;
+    white-space: normal;
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+  #btnFinishLevel2Surgery {
+    width: 100%;
+    min-height: 52px;
+    white-space: normal;
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+  .surgery-tool-btn {
+    min-height: 50px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .surgery-tools-grid {
+    grid-template-columns: 1fr;
+  }
+  .tool-rack-container {
+    padding: 0.75rem 0.5rem;
+  }
+  .tool-rack-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
   .lvl2-options-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Nivel 3: Máquina Ribosomal */
+  .chassis-mrna-track {
+    padding: 0.5rem 0.4rem;
+    gap: 0.35rem;
+    overflow-x: hidden;
+  }
+  .mrna-conveyor-belt {
+    gap: 0.25rem;
+  }
+  .conveyor-codon-node {
+    min-width: 38px;
+    padding: 0.2rem 0.25rem;
+    font-size: 0.72rem;
+  }
+  .conveyor-codon-node .codon-triplet {
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .mrna-end-cap,
+  .mrna-end-polya {
+    font-size: 0.68rem;
   }
   .ribosome-sites-row {
     grid-template-columns: 1fr;
@@ -5612,28 +6081,6 @@ body.biotech-theme {
   .trna-cards-grid {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
   }
-  .splicing-strand-wrap {
-    flex-direction: column;
-  }
-  .splice-segment {
-    min-width: 100%;
-  }
-  .compartments-map-layout {
-    flex-direction: column;
-  }
-  .circuit-arrow {
-    transform: rotate(90deg);
-    padding: 0.5rem 0;
-  }
-  .cell-zone {
-    min-width: 100%;
-  }
-  .dossier-grid {
-    grid-template-columns: 1fr;
-  }
-  .mol-tools-grid {
-    grid-template-columns: 1fr;
-  }
   .mrna-codon-slots-row {
     gap: 0.4rem;
   }
@@ -5644,7 +6091,81 @@ body.biotech-theme {
   .transesterification-workspace {
     flex-direction: column;
   }
-  .surgery-tools-grid {
+
+  /* Nivel 4: Tráfico Celular */
+  .lvl4-station-stepper {
+    overflow-x: hidden;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .stepper-node {
+    font-size: 0.7rem;
+    gap: 0.3rem;
+  }
+  .cellular-traffic-board {
+    overflow-x: hidden;
+    padding: 0.75rem 0.5rem;
+  }
+  .map-topology-grid {
+    flex-direction: column;
+    min-width: 0;
+    width: 100%;
+    gap: 0.65rem;
+  }
+  .topology-sector {
+    min-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .circuit-arrow,
+  .junction-connector {
+    transform: rotate(90deg);
+    padding: 0.35rem 0;
+    align-self: center;
+  }
+  .route-switches-grid {
+    grid-template-columns: 1fr;
+  }
+  .btn-route-switch {
+    padding: 0.8rem 0.95rem;
+    min-height: 52px;
+  }
+
+  /* Nivel 5: Alineamiento y Diagnóstico */
+  .genomic-alignment-box {
+    overflow-x: hidden;
+    padding: 0.75rem 0.5rem;
+  }
+  .alignment-row {
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    width: 100%;
+    margin-bottom: 0.75rem;
+  }
+  .seq-row-label {
+    width: 100%;
+    margin-bottom: 0.35rem;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+  .bases-track {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    width: 100%;
+  }
+  .base-cell {
+    width: 100%;
+    height: 48px;
+    min-width: 0;
+  }
+  .alignment-divider {
+    display: none;
+  }
+  .dossier-grid {
     grid-template-columns: 1fr;
   }
   .aberrant-options-grid {
@@ -5653,11 +6174,60 @@ body.biotech-theme {
 }
 
 @media (max-width: 480px) {
+  .segment-intron-raw {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+  .segment-intron-raw .segment-bases {
+    font-size: 0.78rem;
+    overflow-wrap: anywhere;
+  }
+  .fictional-case-disclaimer .disclaimer-badge {
+    display: inline-block;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .chassis-chambers-row {
+    grid-template-columns: 1fr;
+  }
+  .ribosome-chamber {
+    min-width: 0;
+    min-height: 90px;
+  }
+  .nucleotide-keyboard {
+    gap: 0.3rem;
+  }
+  .btn-nucleotide {
+    min-width: 0;
+    padding-inline: 0.2rem;
+  }
+  .btn-nucleotide .btn-base-name {
+    font-size: 0.65rem;
+    overflow-wrap: anywhere;
+  }
+  .gameplay-meta-group {
+    gap: 0.25rem;
+  }
+  .gameplay-meta-group .btn {
+    white-space: nowrap;
+    padding: 0.35rem 0.4rem;
+    font-size: 0.72rem;
+  }
+  .gp-score-pill {
+    flex: 0 0 auto;
+  }
+  .gp-score-label {
+    display: none;
+  }
   .lvl2-step-tab,
   .lvl4-station-tab,
   .lvl5-phase-tab {
-    min-width: 100%;
-    font-size: 0.78rem;
+    flex: 0 0 auto;
+    min-width: auto;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.5rem;
   }
   .cert-outer-frame {
     padding: 1rem 0.75rem;
@@ -5666,7 +6236,6 @@ body.biotech-theme {
     flex-direction: column;
   }
   .base-cell {
-    width: 32px;
     height: 44px;
   }
   .base-letter {
@@ -5674,6 +6243,7 @@ body.biotech-theme {
   }
   .cargo-item-token {
     padding: 0.6rem 0.75rem;
+    min-height: 48px;
   }
   .tool-token-info strong {
     font-size: 0.82rem;
@@ -5683,6 +6253,7 @@ body.biotech-theme {
   }
   .surgery-tool-btn {
     padding: 0.6rem 0.75rem;
+    min-height: 48px;
   }
   .tool-details strong {
     font-size: 0.82rem;

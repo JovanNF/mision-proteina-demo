@@ -176,6 +176,97 @@ class Level2Controller {
     }
   }
 
+  _getToolActionHint(toolId) {
+    switch (toolId) {
+      case 'tool_capping':
+        return "Toca el extremo 5'-PPP para colocar la caperuza m7G";
+      case 'tool_snrnp_u1':
+        return "Toca el sitio donador 5'-GU para acoplar U1";
+      case 'tool_snrnp_u2':
+        return "Toca el punto de ramificación A (2'-OH) para acoplar U2";
+      case 'tool_transester_1':
+        return "Toca el 2'-OH de la Adenina o el sitio 5'-GU para iniciar la 1ª transesterificación";
+      case 'tool_transester_2':
+        return "Toca el 3'-OH del Exón 1 o el aceptor 3'-AG para empalmar exones";
+      case 'tool_cpsf_cutter':
+        return "Toca el locus de corte downstream de AAUAAA";
+      case 'tool_pap_polymerase':
+        return "Pulsa el botón de PAP para sintetizar la cola Poli-A";
+      case 'tool_genetic_analyzer':
+        return "Analiza el transcrito y emite tu veredicto molecular abajo";
+      default:
+        return "Aplica la herramienta sobre la macromolécula";
+    }
+  }
+
+  _getToolIcon(toolId) {
+    switch (toolId) {
+      case 'tool_capping': return '💎';
+      case 'tool_snrnp_u1':
+      case 'tool_snrnp_u2': return '🧬';
+      case 'tool_transester_1': return '⚡';
+      case 'tool_transester_2': return '🔗';
+      case 'tool_cpsf_cutter': return '✂️';
+      case 'tool_pap_polymerase': return '⚡';
+      case 'tool_genetic_analyzer': return '🔬';
+      default: return '🧰';
+    }
+  }
+
+  _renderActiveToolBanner() {
+    const isEquipped = !!this.activeTool;
+    const icon = isEquipped ? this._getToolIcon(this.activeTool.id) : '🧰';
+    const title = isEquipped ? this.activeTool.name : 'Ninguna herramienta seleccionada';
+    const hint = isEquipped ? this._getToolActionHint(this.activeTool.id) : 'Toca una herramienta del instrumental inferior para equiparla';
+
+    return `
+      <div class="active-tool-banner-bar ${isEquipped ? 'is-equipped' : ''}" id="activeToolBanner">
+        <span class="active-tool-icon">${icon}</span>
+        <div class="active-tool-body">
+          <span class="active-tool-label">${isEquipped ? 'HERRAMIENTA ACTIVA' : 'INSTRUMENTAL DE MESA'}</span>
+          <strong class="active-tool-title">${title}</strong>
+          <span class="active-tool-instruction">${hint}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  _renderMolecularOverviewBar(activeSegment) {
+    const isCap = this.isCapAttached;
+    const isSpliced = this.exonsJoined;
+    const isPolyA = this.papPulses >= this.maxPapPulses;
+    const stg = this.currentStage;
+
+    return `
+      <div class="mol-strand-overview-bar" aria-label="Estructura molecular 5' a 3'">
+        <div class="overview-bar-title">HEBRA 5' ➔ 3':</div>
+        <div class="overview-segments-list">
+          <div class="overview-seg ${activeSegment === 'cap' ? 'active-seg' : (isCap ? 'done-seg' : '')}">
+            <span class="seg-dot">${isCap ? '💎' : '⚪'}</span>
+            <span class="seg-name">5'-Cap</span>
+          </div>
+          <span class="overview-link">─</span>
+          <div class="overview-seg ${activeSegment === 'exon1' ? 'active-seg' : 'done-seg'}">
+            <span class="seg-name">Exón 1</span>
+          </div>
+          <span class="overview-link">─</span>
+          <div class="overview-seg ${activeSegment === 'intron' ? 'active-seg' : (isSpliced ? 'done-seg' : '')}">
+            <span class="seg-name">${stg === 5 ? 'Intrón (3\'-GG)' : 'Intrón 1 (5\'-GU···A···AG)'}</span>
+          </div>
+          <span class="overview-link">─</span>
+          <div class="overview-seg ${activeSegment === 'exon2' ? 'active-seg' : 'done-seg'}">
+            <span class="seg-name">Exón 2</span>
+          </div>
+          <span class="overview-link">─</span>
+          <div class="overview-seg ${activeSegment === 'polya' ? 'active-seg' : (isPolyA ? 'done-seg' : '')}">
+            <span class="seg-dot">${isPolyA ? '⚡' : '⚪'}</span>
+            <span class="seg-name">3'-PoliA</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
   render() {
     if (!this.container) return;
 
@@ -212,6 +303,9 @@ class Level2Controller {
             <span class="step-num">5</span> Splicing Aberrante
           </button>
         </div>
+
+        <!-- Banner de Herramienta Activa (Siempre visible en móvil y escritorio) -->
+        ${this._renderActiveToolBanner()}
 
         <!-- Mesa de Cirugía de la Macromolécula Viva -->
         <div class="mol-surgery-table glass-panel" id="molSurgeryTable">
@@ -250,6 +344,8 @@ class Level2Controller {
     if (stg === 1) {
       // ETAPA 1: CAPPING 5'
       return `
+        ${this._renderMolecularOverviewBar('cap')}
+
         <div class="surgery-op-header">
           <span class="surgery-badge">OPERACIÓN 1: PROTECCIÓN COTRANSCRIPCIONAL DEL EXTREMO 5'</span>
           <h4 class="surgery-title">Protege el Extremo 5'-PPP Inicial Frente al Ataque Exonucleolítico</h4>
@@ -321,6 +417,8 @@ class Level2Controller {
     if (stg === 2) {
       // ETAPA 2: ACOPLAR snRNPs U1 Y U2
       return `
+        ${this._renderMolecularOverviewBar('intron')}
+
         <div class="surgery-op-header">
           <span class="surgery-badge">OPERACIÓN 2: ENSAMBLAJE DEL COMPLEJO ESPLICEOSOMAL</span>
           <h4 class="surgery-title">Estructura el Centro Catalítico en las Secuencias Consenso del Intrón</h4>
@@ -415,6 +513,8 @@ class Level2Controller {
     if (stg === 3) {
       // ETAPA 3: TRANSESTERIFICACIONES (ATAQUE 2'-OH FORMANDO LAZO Y UNIÓN DE EXONES SIN LIGASA)
       return `
+        ${this._renderMolecularOverviewBar('intron')}
+
         <div class="surgery-op-header">
           <span class="surgery-badge">OPERACIÓN 3: CATÁLISIS POR TRANSESTERIFICACIÓN CONCERTADA</span>
           <h4 class="surgery-title">
@@ -540,6 +640,8 @@ class Level2Controller {
       const curLen = tailLengths[this.papPulses] || 0;
 
       return `
+        ${this._renderMolecularOverviewBar('polya')}
+
         <div class="surgery-op-header">
           <span class="surgery-badge">OPERACIÓN 4: PROCESAMIENTO Y POLIADENILACIÓN DEL EXTREMO 3'</span>
           <h4 class="surgery-title">
@@ -638,6 +740,8 @@ class Level2Controller {
     if (stg === 5) {
       // ETAPA 5: SPLICING ABERRANTE (DILEMA MOLECULAR 3'-GG)
       return `
+        ${this._renderMolecularOverviewBar('intron')}
+
         <div class="surgery-op-header">
           <span class="surgery-badge">OPERACIÓN 5: EVALUACIÓN DE SPLICING ABERRANTE</span>
           <h4 class="surgery-title">Diagnostica la Falla en el Sitio Aceptor Mutado (3'-GG)</h4>
@@ -1035,6 +1139,12 @@ class Level2Controller {
 
         toolButtons.forEach(b => b.classList.remove('tool-equipped'));
         btn.classList.add('tool-equipped');
+
+        // Actualizar banner superior de herramienta activa
+        const bannerContainer = this.container.querySelector('#activeToolBanner');
+        if (bannerContainer) {
+          bannerContainer.outerHTML = this._renderActiveToolBanner();
+        }
 
         // Resaltar dianas moleculares en la macromolécula
         const targets = this.container.querySelectorAll('.pulse-target, .mol-consensus-target, .mol-node-terminal');
