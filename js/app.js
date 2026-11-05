@@ -8,8 +8,17 @@ class AppController {
     this.currentView = 'screenHome';
     this.activeLevelInstance = null;
     this.modalCallback = null;
+    this._checkDevMode();
 
     this.init();
+  }
+
+  _checkDevMode() {
+    // El modo de pruebas se activa automáticamente ÚNICAMENTE en entorno local
+    const isLocal = window.location.hostname === 'localhost' ||
+                    window.location.hostname === '127.0.0.1' ||
+                    window.location.protocol === 'file:';
+    this.isDevMode = isLocal;
   }
 
   init() {
@@ -31,8 +40,11 @@ class AppController {
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const lvl = parseInt(urlParams.get('level'), 10);
-      if (lvl >= 1 && lvl <= 5 && window.gameState.isUnlocked(lvl)) {
-        setTimeout(() => this.startLevel(lvl), 50);
+      if (lvl >= 1 && lvl <= 5) {
+        // En producción solo se permite si el nivel está desbloqueado
+        if (this.isDevMode || window.gameState.isUnlocked(lvl)) {
+          setTimeout(() => this.startLevel(lvl), 50);
+        }
       }
     } catch (e) {
       console.warn('URL params error:', e);
@@ -209,21 +221,88 @@ class AppController {
     if (!this.levelGrid) return;
     this.levelGrid.innerHTML = '';
 
+    // MODO DE PRUEBAS (Solo en entorno local: localhost / 127.0.0.1 / file:)
+    if (this.isDevMode) {
+      const devBar = document.createElement('div');
+      devBar.className = 'dev-test-bar glass-panel';
+      devBar.innerHTML = `
+        <div class="dev-bar-header">
+          <div class="dev-bar-tag"><span class="dev-dot"></span> 🧪 MODO DE PRUEBAS ACTIVO (ENTORNO LOCAL)</div>
+          <div class="dev-bar-help">Acceso directo a cualquier nivel sin alterar el progreso guardado</div>
+        </div>
+        <div class="dev-bar-actions">
+          <button class="btn btn-outline btn-xs dev-lvl-btn" data-lvl="1">Fase 01 (Transcripción)</button>
+          <button class="btn btn-outline btn-xs dev-lvl-btn" data-lvl="2">Fase 02 (Splicing)</button>
+          <button class="btn btn-outline btn-xs dev-lvl-btn" data-lvl="3">Fase 03 (Traducción)</button>
+          <button class="btn btn-outline btn-xs dev-lvl-btn" data-lvl="4">Fase 04 (Tráfico)</button>
+          <button class="btn btn-outline btn-xs dev-lvl-btn" data-lvl="5">Fase 05 (Diagnóstico)</button>
+          <button class="btn btn-warning btn-xs dev-cert-btn">🎓 Certificado</button>
+        </div>
+      `;
+      devBar.querySelectorAll('.dev-lvl-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const target = parseInt(btn.dataset.lvl, 10);
+          if (window.audioMgr) window.audioMgr.playClick();
+          this.startLevel(target);
+        });
+      });
+      const bCert = devBar.querySelector('.dev-cert-btn');
+      if (bCert) {
+        bCert.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (window.audioMgr) window.audioMgr.playSuccess();
+          this.showFinalCertificateModal();
+        });
+      }
+      this.levelGrid.appendChild(devBar);
+    }
+
+    const allCompleted = [1, 2, 3, 4, 5].every(id => window.gameState.isCompleted(id));
+
+    // Si todas las misiones están completadas, mostrar banner de certificado
+    if (allCompleted) {
+      const banner = document.createElement('div');
+      banner.className = 'final-cert-banner glass-panel';
+      banner.innerHTML = `
+        <div class="cert-banner-content">
+          <div class="cert-banner-icon">🎓</div>
+          <div class="cert-banner-text">
+            <h4>¡PROGRAMA INTEGRAL DE BIOLOGÍA MOLECULAR COMPLETADO!</h4>
+            <p>Has superado las 5 fases del dogma central y resuelto el caso genético 042-B. Puntaje: <strong>${window.gameState.getTotalScore()} / 500 pts</strong></p>
+          </div>
+        </div>
+        <button class="btn btn-primary glow-effect btn-sm" id="btnViewCertBanner">
+          Ver Certificado de finalización — Misión Proteína
+        </button>
+      `;
+      const btnCert = banner.querySelector('#btnViewCertBanner');
+      if (btnCert) {
+        btnCert.addEventListener('click', () => {
+          if (window.audioMgr) window.audioMgr.playSuccess();
+          this.showFinalCertificateModal();
+        });
+      }
+      this.levelGrid.appendChild(banner);
+    }
+
     window.GAME_LEVELS.forEach(lvl => {
-      const isLevel1 = lvl.id === 1;
+      const isUnlocked = this.isDevMode || window.gameState.isUnlocked(lvl.id);
       const isCompleted = window.gameState.isCompleted(lvl.id);
       const currentScore = window.gameState.getLevelScore(lvl.id);
 
       const card = document.createElement('div');
-      card.className = `level-card ${isLevel1 ? 'unlocked' : 'locked'}`;
+      card.className = `level-card ${isUnlocked ? 'unlocked' : 'locked'}`;
 
       let statusBadgeHtml = '';
-      if (isLevel1) {
-        statusBadgeHtml = isCompleted
-          ? `<span class="level-status-tag status-ready">✓ COMPLETADA</span>`
-          : `<span class="level-status-tag status-ready">● DEMO JUGABLE</span>`;
+      if (isCompleted) {
+        statusBadgeHtml = `<span class="level-status-tag status-ready">✓ COMPLETADA (${currentScore} pts)</span>`;
+      } else if (isUnlocked) {
+        statusBadgeHtml = this.isDevMode && !window.gameState.isUnlocked(lvl.id)
+          ? `<span class="level-status-tag status-ready" style="border-color: #f59e0b; color: #fcd34d;">🧪 DESBLOQUEO DEV</span>`
+          : `<span class="level-status-tag status-ready">● MISIÓN DISPONIBLE</span>`;
       } else {
-        statusBadgeHtml = `<span class="level-status-tag status-locked">🔒 PRÓXIMAMENTE</span>`;
+        statusBadgeHtml = `<span class="level-status-tag status-locked">🔒 BLOQUEADA (Fase 0${lvl.id - 1})</span>`;
       }
 
       card.innerHTML = `
@@ -239,23 +318,23 @@ class AppController {
 
         <div class="level-card-bottom">
           <div class="level-score-preview">
-            ${isLevel1 ? `Puntuación: <span>${currentScore} / ${lvl.maxScore} pts</span>` : `<span style="color: var(--text-muted); font-size: 0.8rem;">Versión completa</span>`}
+            ${isUnlocked 
+              ? `Puntuación: <span>${currentScore} / ${lvl.maxScore} pts</span>` 
+              : `<span style="color: var(--text-muted); font-size: 0.8rem;">Supera la fase anterior</span>`}
           </div>
-          <button class="btn ${isLevel1 ? 'btn-primary' : 'btn-outline'} btn-sm btn-play-level">
-            ${isLevel1 ? (isCompleted ? 'Repetir Demo' : 'Iniciar Demo') : 'Ver detalles'}
+          <button class="btn ${isUnlocked ? 'btn-primary' : 'btn-outline'} btn-sm btn-play-level" ${isUnlocked ? '' : 'disabled'}>
+            ${isCompleted ? 'Repetir Fase' : (isUnlocked ? 'Iniciar Fase' : 'Bloqueada')}
           </button>
         </div>
       `;
 
       const btn = card.querySelector('.btn-play-level');
-      btn.addEventListener('click', () => {
-        window.audioMgr.playClick();
-        if (isLevel1) {
+      if (btn && isUnlocked) {
+        btn.addEventListener('click', () => {
+          window.audioMgr.playClick();
           this.startLevel(lvl.id);
-        } else {
-          this.showLevelPreviewModal(lvl);
-        }
-      });
+        });
+      }
 
       this.levelGrid.appendChild(card);
     });
@@ -282,47 +361,140 @@ class AppController {
 
     this.switchView('screenGameplay');
 
-    if (levelId === 1) {
-      this.activeLevelInstance = new window.Level1Controller(
-        lvl,
-        (completedId, score) => {
-          this._handleLevelCompleted(completedId, score);
-        },
-        () => {
-          this.switchView('screenLevelSelector');
-        }
-      );
+    const onComplete = (completedId, score) => {
+      this._handleLevelCompleted(completedId, score);
+    };
+
+    const onExit = () => {
+      this.switchView('screenLevelSelector');
+    };
+
+    if (levelId === 1 && typeof window.Level1Controller === 'function') {
+      this.activeLevelInstance = new window.Level1Controller(lvl, onComplete, onExit);
+    } else if (levelId === 2 && typeof window.Level2Controller === 'function') {
+      this.activeLevelInstance = new window.Level2Controller(lvl, onComplete, onExit);
+    } else if (levelId === 3 && typeof window.Level3Controller === 'function') {
+      this.activeLevelInstance = new window.Level3Controller(lvl, onComplete, onExit);
+    } else if (levelId === 4 && typeof window.Level4Controller === 'function') {
+      this.activeLevelInstance = new window.Level4Controller(lvl, onComplete, onExit);
+    } else if (levelId === 5 && typeof window.Level5Controller === 'function') {
+      this.activeLevelInstance = new window.Level5Controller(lvl, onComplete, onExit);
+    }
+
+    if (this.activeLevelInstance) {
       this.activeLevelInstance.mount(this.simulationStage);
-    } else {
-      // Niveles 2 a 5: Próximamente en versión completa
-      this.simulationStage.innerHTML = `
-        <div class="stage-card glass-panel" style="text-align: center; padding: 2.75rem 1.25rem;">
-          <span style="font-size: 3.2rem;">🔬</span>
-          <div style="display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; color: #f59e0b; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); padding: 0.25rem 0.75rem; border-radius: 999px; margin: 0.85rem 0 0.5rem; letter-spacing: 0.05em;">
-            PRÓXIMAMENTE EN VERSIÓN COMPLETA
-          </div>
-          <h3 style="color: var(--accent-cyan); margin: 0.5rem 0; font-size: 1.35rem;">
-            ${lvl.title}
-          </h3>
-          <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 1.25rem; font-size: 0.92rem; line-height: 1.5;">
-            Esta misión forma parte del desarrollo de la versión final. En esta versión de demostración, por favor explora y evalúa la <strong>Fase 01: Transcripción</strong>.
-          </p>
-          <div style="background: rgba(6, 182, 212, 0.08); border: 1px solid var(--border-glass); border-radius: 8px; padding: 1rem; max-width: 520px; margin: 0 auto 1.75rem; font-size: 0.86rem; text-align: left;">
-            <div style="color: var(--accent-cyan); font-weight: 700; margin-bottom: 0.35rem;">Especificación Celular Prevista:</div>
-            <div><strong>Ubicación:</strong> ${lvl.scientificBrief.location}</div>
-            <div style="margin-top: 0.25rem;"><strong>Maquinaria:</strong> ${lvl.scientificBrief.machinery}</div>
-            <div style="margin-top: 0.5rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.45;">${lvl.scientificBrief.mechanism}</div>
-          </div>
-          <button class="btn btn-primary" onclick="window.app.switchView('screenLevelSelector')">
-            ← Volver al Panel de Misiones
-          </button>
-        </div>
-      `;
     }
   }
 
   _handleLevelCompleted(levelId, score) {
-    this.switchView('screenLevelSelector');
+    window.gameState.recordLevelCompletion(levelId, score);
+    
+    // Si completó los 5 niveles, mostrar certificado
+    const allCompleted = [1, 2, 3, 4, 5].every(id => window.gameState.isCompleted(id));
+    if (allCompleted) {
+      this.showFinalCertificateModal();
+    } else {
+      this.switchView('screenLevelSelector');
+    }
+  }
+
+  showFinalCertificateModal() {
+    if (window.audioMgr) window.audioMgr.playSuccess();
+
+    const totalScore = window.gameState.getTotalScore();
+    const scores = window.gameState.state.scores;
+
+    const certHtml = `
+      <div class="medical-cert-wrapper">
+        <div class="cert-outer-frame">
+          <div class="cert-header-block">
+            <div class="cert-republic-seal">🧬</div>
+            <span class="cert-dept-tag">CENTRO DE INVESTIGACIÓN EN BIOLOGÍA MOLECULAR Y DOGMA CENTRAL</span>
+            <h3 class="cert-title">CERTIFICADO DE FINALIZACIÓN — MISIÓN PROTEÍNA</h3>
+            <p class="cert-subtitle">Certificado de finalización — Misión Proteína</p>
+          </div>
+
+          <div class="cert-body-block">
+            <p class="cert-conferred-text">
+              Por haber completado con excelencia científica las cinco fases cardinales del flujo de la información genética celular y la resolución pericial del <strong>Caso Didáctico 042-B</strong> en el simulador <em>Misión Proteína: Código de Vida</em>.
+            </p>
+
+            <!-- Desglose de puntuaciones por fase -->
+            <div class="cert-score-breakdown">
+              <table class="cert-table">
+                <thead>
+                  <tr>
+                    <th>Fase del Dogma Central</th>
+                    <th>Mecanismo Clave</th>
+                    <th style="text-align: right;">Puntuación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>01. Transcripción</strong></td>
+                    <td>ARN Polimerasa II (3'→5' molde, 5'→3' síntesis)</td>
+                    <td class="score-col">${scores[1] || 0} / 100</td>
+                  </tr>
+                  <tr>
+                    <td><strong>02. Maduración y Splicing</strong></td>
+                    <td>Capping m7G, 2 Transesterificaciones snRNP y Poli-A</td>
+                    <td class="score-col">${scores[2] || 0} / 100</td>
+                  </tr>
+                  <tr>
+                    <td><strong>03. Traducción Ribosomal</strong></td>
+                    <td>Ribosoma 80S, Anticodones 3'→5' y Factor eRF1</td>
+                    <td class="score-col">${scores[3] || 0} / 100</td>
+                  </tr>
+                  <tr>
+                    <td><strong>04. Tráfico y Control ERAD</strong></td>
+                    <td>SRP, Poro Sec61, Chaperona BiP y Proteasoma 26S</td>
+                    <td class="score-col">${scores[4] || 0} / 100</td>
+                  </tr>
+                  <tr>
+                    <td><strong>05. Diagnóstico Molecular</strong></td>
+                    <td>Transversión en Codón 2, Mutación Nonsense y NMD no determinable con datos disponibles</td>
+                    <td class="score-col">${scores[5] || 0} / 100</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr class="cert-total-row">
+                    <td colspan="2"><strong>PUNTAJE GLOBAL OBTENIDO:</strong></td>
+                    <td class="score-col score-total"><strong>${totalScore} / 500</strong></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <div class="cert-signature-row">
+              <div class="cert-sig-box">
+                <div class="sig-line"></div>
+                <span class="sig-title">Misión Proteína — Simulador educativo</span>
+              </div>
+              <div class="cert-seal-badge">
+                <div class="seal-circle">
+                  <span>LOGRO</span>
+                  <strong>100%</strong>
+                  <span>COMPLETO</span>
+                </div>
+              </div>
+              <div class="cert-sig-box">
+                <div class="sig-line"></div>
+                <span class="sig-title">Laboratorio de Biología Molecular</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    this.showModal(
+      "🎓 Certificado de finalización — Misión Proteína",
+      certHtml,
+      "Volver al Panel de Misiones",
+      () => {
+        this.switchView('screenLevelSelector');
+      }
+    );
   }
 
   showLevelPreviewModal(lvl) {

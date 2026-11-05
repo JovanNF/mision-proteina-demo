@@ -1957,8 +1957,8 @@ body.biotech-theme {
   .modal-dialog {
     padding: 1.25rem 1rem;
     width: min(94vw, 520px);
-    max-height: calc(100vh - 2.5rem);
-    overflow-y: auto;
+    max-height: calc(100vh - 2rem);
+    overflow: hidden;
   }
   .modal-footer {
     width: 100%;
@@ -2090,5 +2090,3604 @@ body.biotech-theme {
   .feedback-banner {
     font-size: 0.78rem;
     padding: 0.65rem 0.8rem;
+  }
+}
+
+/* ==========================================================================
+   FASE B — ESTILOS DE NIVELES 2, 3, 4, 5 Y CERTIFICADO MÉDICO
+   ========================================================================== */
+
+/* Rompecabezas Molecular Level 2 Workbench */
+.lvl2-puzzle-root {
+  position: relative;
+}
+
+/* ==========================================================================
+   NIVEL 2: MESA DE CIRUGÍA MOLECULAR DE PRE-ARNm
+   ========================================================================== */
+
+.lvl2-surgery-root {
+  animation: fadeIn 0.3s ease;
+}
+
+.mol-surgery-table {
+  padding: 1.5rem;
+  margin: 1.25rem 0;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+  background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.96), rgba(7, 11, 20, 0.99));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.surgery-op-header {
+  margin-bottom: 1.25rem;
+}
+
+.surgery-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  margin-bottom: 0.4rem;
+}
+
+.surgery-title {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0.2rem 0 0.45rem;
+}
+
+.surgery-instruction {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin: 0;
+  background: rgba(6, 182, 212, 0.08);
+  border-left: 3px solid var(--accent-cyan);
+  padding: 0.5rem 0.85rem;
+  border-radius: 0 6px 6px 0;
+}
+
+/* Visor de Macromolécula Viva */
+.macromolecule-viewport {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  background: rgba(10, 16, 30, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.macromolecule-chain {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: max-content;
+  padding: 0.65rem 0;
+}
+
+/* Nodos Terminales */
+.mol-node-terminal {
+  min-width: 140px;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0.5rem 0.85rem;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.node-triphosphate {
+  border: 2px dashed rgba(245, 158, 11, 0.5);
+  background: rgba(245, 158, 11, 0.08);
+  color: #fcd34d;
+}
+
+.triphosphate-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.terminal-ppp-badge {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #f59e0b;
+}
+
+.node-capped {
+  border: 1px solid #38bdf8;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(59, 130, 246, 0.25) 100%);
+  color: #fff;
+}
+
+.node-capped-mini {
+  border: 1px solid #38bdf8;
+  background: rgba(6, 182, 212, 0.15);
+  color: #38bdf8;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-md);
+}
+
+.cap-group-visual {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cap-gem-symbol {
+  font-size: 1.4rem;
+}
+
+.cap-text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.cap-text-block strong {
+  font-size: 0.92rem;
+  color: #38bdf8;
+}
+
+.cap-text-block small {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* Segmentos de la Hebra */
+.mol-strand-segment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.65rem 0.95rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  transition: all 0.3s ease;
+}
+
+.segment-tag {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.segment-bases {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.segment-utr {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fcd34d;
+}
+
+.segment-exon1,
+.segment-exon2,
+.segment-exon-joined {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #6ee7b7;
+}
+
+.segment-intron-raw {
+  background: rgba(244, 63, 94, 0.08);
+  border: 1px dashed rgba(244, 63, 94, 0.4);
+  color: #fda4af;
+}
+
+.tag-intron {
+  color: #f43f5e;
+  font-weight: 700;
+}
+
+/* Zona Quirúrgica del Intrón (Etapa 2) */
+.mol-intron-surgery-zone {
+  background: rgba(244, 63, 94, 0.06);
+  border: 1px dashed rgba(244, 63, 94, 0.45);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.intron-surgical-header {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #fda4af;
+  letter-spacing: 0.05em;
+}
+
+.intron-active-elements {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.mol-consensus-target {
+  min-width: 120px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: all 0.25s ease;
+}
+
+.consensus-open {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.donor-tag {
+  color: #34d399;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.branch-tag {
+  color: #c084fc;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.acceptor-tag {
+  color: #fda4af;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.docked-glow {
+  border: 1px solid #10b981;
+  background: rgba(16, 185, 129, 0.2);
+  color: #a7f3d0;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.snrnp-assembled {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.78rem;
+}
+
+.intron-connecting-strand {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.acceptor-static-node {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.35rem 0.65rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Transesterificaciones (Etapa 3) */
+.transesterification-workspace {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+}
+
+.exon1-block,
+.exon2-block {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-mono);
+}
+
+.exon1-reactive-state {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+  cursor: pointer;
+}
+
+.reactive-oh-beacon {
+  color: #38bdf8;
+  font-weight: 800;
+  font-size: 0.82rem;
+}
+
+.bonded-label {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
+.lariat-catalytic-zone {
+  flex: 1 1 auto;
+  min-width: 280px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nucleophilic-attack-stage {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.donor-phospho-target {
+  background: rgba(6, 182, 212, 0.12);
+  border: 2px dashed var(--accent-cyan);
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-md);
+  text-align: center;
+  cursor: pointer;
+}
+
+.nucleophilic-reaction-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vector-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #38bdf8;
+  font-weight: 700;
+  margin-top: -0.25rem;
+}
+
+.btn-branch-nucleophile {
+  background: rgba(192, 132, 252, 0.2);
+  border: 1px solid #c084fc;
+  color: #e9d5ff;
+  border-radius: var(--radius-full);
+  padding: 0.55rem 0.95rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-branch-nucleophile:hover {
+  background: rgba(192, 132, 252, 0.35);
+  transform: scale(1.04);
+}
+
+.lariat-physical-loop-graphic {
+  text-align: center;
+}
+
+.lariat-acceptor-tip {
+  margin-top: 0.75rem;
+  background: rgba(244, 63, 94, 0.15);
+  border: 2px dashed #f43f5e;
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-mono);
+}
+
+/* Exones Unidos (Transesterificación 2 Concluida) */
+.exons-covalently-joined {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  text-align: center;
+}
+
+.joined-header-banner {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #34d399;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.spliced-chain-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+}
+
+.spliced-exon-node {
+  padding: 0.65rem 1.15rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.exon1-color,
+.exon2-color {
+  background: rgba(16, 185, 129, 0.25);
+  border: 1px solid #10b981;
+  color: #fff;
+}
+
+.covalent-transesterified-bond {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #38bdf8;
+  font-size: 0.85rem;
+}
+
+.lariat-dissolved-note {
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Escisión y Poliadenilación (Etapa 4) */
+.mol-cleavage-locus {
+  min-width: 140px;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: all 0.25s ease;
+}
+
+.locus-cleaved {
+  border: 1px solid #f43f5e;
+  background: rgba(244, 63, 94, 0.15);
+}
+
+.cleaved-status-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fda4af;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.cleavage-target-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fcd34d;
+  font-size: 0.78rem;
+}
+
+.mol-polya-tail-zone {
+  min-width: 130px;
+  display: flex;
+  align-items: center;
+}
+
+.polya-beads-tail {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #f59e0b;
+}
+
+.pap-injector-console {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.pap-console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin-bottom: 0.65rem;
+}
+
+.pap-meter-bar {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.pap-meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  transition: width 0.3s ease;
+}
+
+/* Splicing Aberrante (Etapa 5) */
+.mutant-strand-inspection {
+  margin-bottom: 1.5rem;
+}
+
+.mutant-banner-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #f43f5e;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.segment-intron-mutant {
+  background: rgba(244, 63, 94, 0.15);
+  border: 2px dashed #f43f5e;
+  color: #fda4af;
+}
+
+.tag-mutant {
+  color: #f43f5e;
+  font-weight: 800;
+}
+
+.mutation-highlight {
+  color: #fff;
+  background: #f43f5e;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  font-weight: 800;
+}
+
+.aberrant-dilemma-console {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.dilemma-prompt {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.aberrant-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.85rem;
+}
+
+.aberrant-verdict-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(10, 16, 30, 0.8);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.aberrant-verdict-btn:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.1);
+  transform: translateY(-2px);
+}
+
+.aberrant-verdict-btn.selected-correct {
+  border-color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.2) !important;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+}
+
+.verdict-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.verdict-text strong {
+  display: block;
+  font-size: 0.9rem;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.verdict-text small {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+/* Rack de Instrumental Quirúrgico Molecular */
+.surgery-tool-rack {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+  background: rgba(10, 16, 30, 0.95);
+}
+
+.tool-rack-header {
+  margin-bottom: 1rem;
+}
+
+.tool-rack-title {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+.tool-rack-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.surgery-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.75rem;
+}
+
+.surgery-tool-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.95rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.surgery-tool-btn:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15);
+}
+
+.tool-equipped {
+  border-color: #38bdf8 !important;
+  background: rgba(56, 189, 248, 0.22) !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
+  transform: scale(1.02);
+}
+
+.tool-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.tool-details strong {
+  display: block;
+  font-size: 0.88rem;
+  color: #fff;
+  margin-bottom: 0.15rem;
+}
+
+.tool-details small {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* Callout de Feedback Quirúrgico */
+.lvl2-feedback-box {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Pulsos y Estados de Activación */
+.pulse-target {
+  cursor: pointer;
+  animation: pulseCyanBorder 1.5s infinite;
+}
+
+@keyframes pulseCyanBorder {
+  0% { border-color: rgba(6, 182, 212, 0.4); box-shadow: 0 0 0 rgba(6, 182, 212, 0); }
+  50% { border-color: rgba(6, 182, 212, 0.9); box-shadow: 0 0 12px rgba(6, 182, 212, 0.4); }
+  100% { border-color: rgba(6, 182, 212, 0.4); box-shadow: 0 0 0 rgba(6, 182, 212, 0); }
+}
+
+.tray-container {
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+  background: rgba(10, 16, 30, 0.95);
+}
+
+.tray-header {
+  margin-bottom: 1rem;
+}
+
+.tray-title {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+.tray-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.mol-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.mol-tool-token {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.95rem;
+  cursor: grab;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.mol-tool-token:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15);
+}
+
+.mol-tool-token:active {
+  cursor: grabbing;
+}
+
+.tool-held {
+  border-color: #38bdf8 !important;
+  background: rgba(56, 189, 248, 0.2) !important;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
+  transform: scale(1.02);
+}
+
+.tool-token-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.tool-token-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-token-info strong {
+  font-size: 0.88rem;
+  color: #fff;
+}
+
+.tool-token-info small {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.stage-continue-panel {
+  margin-top: 1.25rem;
+  text-align: right;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Barra de Modo de Pruebas (Solo Entorno Local) */
+.dev-test-bar {
+  grid-column: 1 / -1;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px dashed rgba(245, 158, 11, 0.45);
+  border-radius: var(--radius-lg);
+  padding: 0.85rem 1.15rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.dev-bar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.dev-bar-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fcd34d;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dev-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+  animation: pulseDot 1.5s infinite;
+}
+
+.dev-bar-help {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.dev-bar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.btn-xs {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  border-radius: 4px;
+}
+
+/* Barra de Pasos / Fases / Estaciones */
+.lvl2-steps-bar,
+.lvl4-circuit-bar,
+.lvl5-phases-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.25rem 0 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.lvl2-step-tab,
+.lvl4-station-tab,
+.lvl5-phase-tab {
+  flex: 1 1 auto;
+  min-width: 140px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  border-radius: var(--radius-md);
+  padding: 0.55rem 0.85rem;
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s ease;
+}
+
+.lvl2-step-tab .step-num,
+.lvl4-station-tab .step-num,
+.lvl5-phase-tab .step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+}
+
+.lvl2-step-tab.active,
+.lvl4-station-tab.active,
+.lvl5-phase-tab.active {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: var(--accent-cyan);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+}
+
+.lvl2-step-tab.active .step-num,
+.lvl4-station-tab.active .step-num,
+.lvl5-phase-tab.active .step-num {
+  background: var(--accent-cyan);
+  color: #000;
+  font-weight: 700;
+}
+
+.lvl2-step-tab.completed,
+.lvl4-station-tab.completed,
+.lvl5-phase-tab.completed {
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #a7f3d0;
+}
+
+.lvl2-step-tab.completed .step-num,
+.lvl4-station-tab.completed .step-num,
+.lvl5-phase-tab.completed .step-num {
+  background: #10b981;
+  color: #000;
+  font-weight: 700;
+}
+
+/* Paneles de Contenido */
+.lvl2-panel,
+.lvl4-panel,
+.lvl5-panel {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+}
+
+.lvl2-panel-header,
+.lvl4-panel-header,
+.lvl5-panel-header {
+  margin-bottom: 1.5rem;
+}
+
+.lvl2-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.lvl2-panel-title {
+  font-size: 1.3rem;
+  color: #fff;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.lvl2-panel-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.bio-code {
+  font-family: var(--font-mono);
+  color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.1);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.88rem;
+}
+
+/* Grid de Opciones */
+.lvl2-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.85rem;
+  margin: 1.5rem 0;
+}
+
+.lvl2-choice-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-md);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+}
+
+.lvl2-choice-card:hover:not(:disabled) {
+  border-color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(6, 182, 212, 0.15);
+}
+
+.lvl2-choice-card .choice-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+/* Cajas de Feedback Formativo */
+.lvl2-feedback-box,
+.lvl3-feedback-box,
+.lvl4-feedback-box,
+.lvl5-feedback-box {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  animation: fadeIn 0.25s ease;
+}
+
+.success-callout {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #d1fae5;
+}
+
+.error-callout {
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  color: #ffe4e6;
+}
+
+/* ==========================================================================
+   NIVEL 2: DETALLES DE CAPPING, SPLICING Y POLIADENILACIÓN
+   ========================================================================== */
+
+/* Capping */
+.lvl2-mol-display {
+  background: rgba(10, 16, 30, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+  overflow-x: auto;
+}
+
+.cap-socket-container {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: max-content;
+}
+
+.cap-socket {
+  width: 90px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.cap-socket.empty {
+  border: 2px dashed rgba(6, 182, 212, 0.4);
+  color: var(--accent-cyan);
+}
+
+.cap-socket.attached {
+  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  border: 1px solid #67e8f9;
+  color: #000;
+  font-weight: 800;
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.5);
+}
+
+.cap-link-arrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.rna-strand-lead {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+}
+
+.utr-block {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fcd34d;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.exon-block {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #6ee7b7;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Splicing Rig */
+.lvl2-splicing-rig {
+  margin: 1.5rem 0;
+}
+
+.splicing-strand-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  background: rgba(10, 16, 30, 0.9);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  overflow-x: auto;
+}
+
+.splice-segment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  min-width: 140px;
+  transition: all 0.3s ease;
+}
+
+.exon1-segment,
+.exon2-segment {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.exon1-segment .seg-seq,
+.exon2-segment .seg-seq {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #34d399;
+  margin-top: 0.35rem;
+}
+
+.seg-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.intron-segment {
+  background: rgba(244, 63, 94, 0.08);
+  border: 1px dashed rgba(244, 63, 94, 0.35);
+  flex: 1 1 auto;
+}
+
+.intron-sequence-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.splice-btn {
+  background: rgba(244, 63, 94, 0.2);
+  border: 1px solid rgba(244, 63, 94, 0.5);
+  color: #fda4af;
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.splice-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.splice-btn.bound {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #10b981;
+  color: #6ee7b7;
+}
+
+.target-pulse {
+  animation: pulseCyan 1.5s infinite;
+  border-color: var(--accent-cyan) !important;
+  color: #fff !important;
+  background: rgba(6, 182, 212, 0.3) !important;
+}
+
+.intron-core-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+}
+
+.splicing-actions-panel {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+/* Poliadenilación */
+.lvl2-polya-display {
+  background: rgba(10, 16, 30, 0.9);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+  overflow-x: auto;
+}
+
+.polya-strand-lead {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: max-content;
+  font-family: var(--font-mono);
+}
+
+.polya-signal-btn {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #fcd34d;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cleavage-site.cleaved .cleaved-cut {
+  background: rgba(244, 63, 94, 0.2);
+  border: 1px dashed #f43f5e;
+  color: #f43f5e;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+}
+
+.polya-tail-poly {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #f59e0b;
+  animation: fadeIn 0.3s ease;
+}
+
+.pap-pulse-box {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+
+.pap-progress-bar {
+  height: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.pap-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #eab308);
+  transition: width 0.3s ease;
+}
+
+/* ==========================================================================
+   NIVEL 3: MOTOR RIBOSOMAL 80S Y TRINQUETE DE ELONGACIÓN (RATCHET ENGINE)
+   ========================================================================== */
+
+.lvl3-engine-root {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: fadeIn 0.35s ease;
+}
+
+/* Dashboard Principal del Motor Ribosomal */
+.ribosomal-engine-dashboard {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(7, 11, 20, 0.98) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+.dashboard-status-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.phase-indicator-pill {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+}
+
+.phase-initiation {
+  background: rgba(139, 92, 246, 0.18);
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.25);
+}
+
+.phase-docking {
+  background: rgba(6, 182, 212, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(6, 182, 212, 0.4);
+}
+
+.phase-peptidyl {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
+}
+
+.phase-translocation {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+}
+
+.phase-termination {
+  background: rgba(244, 63, 94, 0.18);
+  color: #fda4af;
+  border: 1px solid rgba(244, 63, 94, 0.5);
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.25);
+}
+
+.phase-completed {
+  background: rgba(139, 92, 246, 0.2);
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.5);
+}
+
+.codon-counter-display {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.codon-counter-display strong {
+  color: #fff;
+}
+
+.codon-seq-badge {
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--accent-cyan);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  font-weight: 800;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+/* Túnel de Salida Superior (Subunidad 60S) */
+.ribosome-exit-tunnel-bay {
+  background: rgba(8, 12, 24, 0.7);
+  border: 1px dashed rgba(139, 92, 246, 0.35);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.15rem;
+}
+
+.tunnel-structural-roof {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.tunnel-header-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #a78bfa;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nascent-chain-track {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tunnel-idle-text {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.polypeptide-pearl-chain {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pearl-aminoacid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #020617;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.pearl-aminoacid:hover {
+  transform: scale(1.1);
+}
+
+.pearl-aminoacid .aa-index {
+  font-size: 0.55rem;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.pearl-aminoacid .aa-code {
+  font-size: 0.88rem;
+  line-height: 1.1;
+}
+
+.peptide-covalent-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #38bdf8;
+  background: rgba(6, 182, 212, 0.15);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+/* Chasis del Ribosoma 80S: Cámaras E, P, A */
+.ribosome-engine-chassis {
+  background: rgba(13, 20, 36, 0.95);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.chassis-subunit-60s,
+.chassis-subunit-40s {
+  text-align: center;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.chassis-subunit-60s {
+  color: #c4b5fd;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px dashed rgba(139, 92, 246, 0.35);
+  margin-bottom: 0.85rem;
+}
+
+.chassis-subunit-40s {
+  color: #67e8f9;
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px dashed rgba(6, 182, 212, 0.35);
+  margin-top: 0.85rem;
+}
+
+.chassis-chambers-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.ribosome-chamber {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 155px;
+  transition: all 0.3s ease;
+}
+
+.ribosome-chamber .chamber-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid var(--border-glass);
+  width: 100%;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.65rem;
+}
+
+.ribosome-chamber .chamber-letter {
+  font-family: var(--font-mono);
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+}
+
+.ribosome-chamber .chamber-name {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ribosome-chamber .chamber-interior {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.chamber-vacant {
+  font-size: 0.78rem;
+  color: rgba(148, 163, 184, 0.4);
+  font-style: italic;
+}
+
+.ribosome-chamber.chamber-listening {
+  border-color: var(--accent-cyan) !important;
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.25), inset 0 0 12px rgba(6, 182, 212, 0.15);
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* Tarjetas de ARNt Alojado en Cámaras P y A */
+.trna-docked-card {
+  background: rgba(22, 32, 54, 0.95);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  padding: 0.5rem 0.65rem;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  animation: popIn 0.25s ease-out;
+}
+
+.card-peptidyl {
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.card-aminoacyl {
+  border-color: rgba(6, 182, 212, 0.5);
+}
+
+.card-deacylated {
+  border-color: rgba(244, 63, 94, 0.45);
+  background: rgba(30, 20, 30, 0.95);
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.2);
+}
+
+.trna-anticodon-stem {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #38bdf8;
+  margin-bottom: 0.3rem;
+}
+
+.trna-payload-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.trna-payload-badge span {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Eyección en Cámara E */
+.trna-ejection-ghost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: #94a3b8;
+  font-size: 0.78rem;
+  animation: popIn 0.3s ease;
+}
+
+.trna-ejection-ghost .ghost-icon {
+  font-size: 1.5rem;
+}
+
+.trna-ejection-ghost strong {
+  font-family: var(--font-mono);
+  color: #e2e8f0;
+}
+
+.trna-ejection-ghost small {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* Espera en Cámara A */
+.chamber-waiting-target {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.waiting-prompt {
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.waiting-anticodon-hint {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+/* Riel / Cinta Transportadora de ARNm */
+.chassis-mrna-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.75rem 0.85rem;
+  background: rgba(6, 10, 20, 0.9);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow-x: auto;
+}
+
+.mrna-end-cap {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #38bdf8;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.mrna-end-polya {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #fbbf24;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.mrna-conveyor-belt {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.conveyor-codon-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  font-family: var(--font-mono);
+  min-width: 54px;
+  transition: all 0.3s ease;
+}
+
+.conveyor-codon-node.codon-under-lens {
+  background: rgba(6, 182, 212, 0.22);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 14px rgba(6, 182, 212, 0.4);
+  transform: scale(1.08);
+}
+
+.conveyor-codon-node.codon-translated {
+  opacity: 0.45;
+}
+
+.codon-triplet {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.codon-assigned-aa {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* Consola de Actuadores Mecánicos */
+.engine-actuators-console {
+  margin-top: 0.5rem;
+}
+
+.actuator-panel-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 23, 42, 0.65);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-glass);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.actuator-action-box {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.08);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.actuator-prompt {
+  font-size: 0.88rem;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.termination-actuator-box {
+  border-color: rgba(244, 63, 94, 0.45);
+  background: rgba(244, 63, 94, 0.08);
+}
+
+/* Botones de Percutor, Trinquete y Factor eRF1 */
+.btn-actuator-peptidyl {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #020617;
+  font-weight: 800;
+  font-size: 0.92rem;
+  font-family: var(--font-main);
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-actuator-peptidyl:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+}
+
+.btn-actuator-ratchet {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #020617;
+  font-weight: 800;
+  font-size: 0.92rem;
+  font-family: var(--font-main);
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-actuator-ratchet:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+}
+
+.btn-actuator-erf1 {
+  background: linear-gradient(135deg, #f43f5e, #be123c);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.92rem;
+  font-family: var(--font-main);
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(244, 63, 94, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-actuator-erf1:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.6);
+}
+
+/* Palanca Mecánica de Trinquete eEF2 (SVG) */
+.ratchet-lever-assembly {
+  background: rgba(10, 16, 30, 0.95);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  margin: 0.5rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  user-select: none;
+  touch-action: pan-y;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(16, 185, 129, 0.1);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ratchet-lever-assembly:hover,
+.ratchet-lever-assembly:focus-visible {
+  border-color: #10b981;
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.35), inset 0 0 20px rgba(16, 185, 129, 0.15);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.ratchet-lever-housing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 220px;
+  width: 100%;
+}
+
+.ratchet-arm-group {
+  transform-origin: 110px 98px;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ratchet-arm-group.arm-pulled {
+  transform: rotate(36deg);
+}
+
+.ratchet-lever-details {
+  text-align: center;
+}
+
+.lever-badge-glowing {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #34d399;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.lever-swipe-callout {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.mrna-conveyor-belt.mrna-shifting {
+  transform: translateX(-40px);
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Liberación de Cadena Polipeptídica Corta */
+.chain-track-released {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, transparent 70%);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+}
+
+.chain-released-floating {
+  animation: floatPeptideCytosol 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes floatPeptideCytosol {
+  0% {
+    transform: translateY(0px) scale(1);
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.6));
+  }
+  100% {
+    transform: translateY(-8px) scale(1.04);
+    filter: drop-shadow(0 0 16px rgba(6, 182, 212, 0.85));
+  }
+}
+
+.peptide-release-sparkle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #c084fc;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+  margin-left: 0.5rem;
+}
+
+.peptide-release-banner {
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
+  border: 1px solid rgba(139, 92, 246, 0.45);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  color: #e2e8f0;
+  display: inline-block;
+}
+
+/* Muelle de ARNt Citosólicos */
+.cytosol-docking-bay {
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  background: radial-gradient(ellipse at bottom, rgba(6, 182, 212, 0.08), rgba(15, 23, 42, 0.95));
+}
+
+.cytosol-docking-bay .bay-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.cytosol-docking-bay .bay-title {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+}
+
+.cytosol-docking-bay .bay-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.trna-dock-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+  gap: 0.85rem;
+}
+
+.trna-feeder-button {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  min-height: 115px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trna-feeder-button:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(6, 182, 212, 0.25);
+}
+
+.trna-feeder-button:active {
+  transform: scale(0.97);
+}
+
+.feeder-key-shortcut {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+
+.feeder-icon {
+  margin: 0.25rem 0;
+}
+
+.feeder-anticodon {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: #e2e8f0;
+  margin: 0.25rem 0;
+}
+
+.feeder-anticodon small {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.feeder-anticodon strong {
+  font-size: 0.92rem;
+  color: #38bdf8;
+}
+
+.feeder-aminoacid {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  border: 1px solid;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  margin-top: 0.3rem;
+}
+
+/* Feedback Bioquímico de la Máquina */
+.lvl3-feedback-box {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  margin-top: 1rem;
+  animation: fadeIn 0.25s ease;
+}
+
+.lvl3-feedback-box.success-callout {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #a7f3d0;
+}
+
+.lvl3-feedback-box.error-callout {
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  color: #fecdd3;
+}
+
+/* Adaptación Responsiva para Pantallas Pequeñas y Móviles */
+@media (max-width: 768px) {
+  .ribosomal-engine-dashboard {
+    padding: 1rem 0.75rem;
+  }
+
+  .chassis-chambers-row {
+    gap: 0.5rem;
+  }
+
+  .ribosome-chamber {
+    padding: 0.65rem 0.35rem;
+    min-height: 135px;
+  }
+
+  .ribosome-chamber .chamber-letter {
+    font-size: 1.5rem;
+  }
+
+  .trna-dock-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.65rem;
+  }
+
+  .btn-actuator-peptidyl,
+  .btn-actuator-ratchet,
+  .btn-actuator-erf1 {
+    font-size: 0.84rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .ribosome-chamber .chamber-name {
+    font-size: 0.62rem;
+  }
+
+  .trna-anticodon-stem {
+    font-size: 0.82rem;
+  }
+
+  .trna-payload-badge {
+    font-size: 0.68rem;
+  }
+
+  .trna-dock-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+
+/* ==========================================================================
+   NIVEL 4: SISTEMA DE TRÁFICO CELULAR Y BIFURCACIÓN DE CALIDAD ERAD
+   ========================================================================== */
+
+.lvl4-circuit-root {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: fadeIn 0.35s ease;
+}
+
+/* Stepper de Estaciones de Tráfico */
+.lvl4-station-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-lg);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass);
+  overflow-x: auto;
+}
+
+.stepper-node {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.stepper-idx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-glass);
+  font-weight: 800;
+  color: var(--text-muted);
+}
+
+.stepper-node.node-active {
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.stepper-node.node-active .stepper-idx {
+  background: var(--accent-cyan);
+  color: #020617;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+.stepper-node.node-done {
+  color: #a7f3d0;
+}
+
+.stepper-node.node-done .stepper-idx {
+  background: #10b981;
+  color: #020617;
+  border-color: #10b981;
+}
+
+.stepper-line {
+  flex: 1;
+  min-width: 20px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.stepper-line.line-done {
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+/* Tablero del Mapa Celular Topológico */
+.cellular-traffic-board {
+  padding: 1.25rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  background: radial-gradient(ellipse at top, rgba(15, 23, 42, 0.98), rgba(6, 10, 20, 0.98));
+  overflow-x: auto;
+}
+
+.map-topology-grid {
+  display: flex;
+  align-items: stretch;
+  gap: 0.65rem;
+  min-width: min-content;
+}
+
+.topology-sector {
+  flex: 1;
+  min-width: 175px;
+  background: rgba(10, 16, 30, 0.9);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.topology-sector.sector-highlight {
+  border-color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.08);
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.2), inset 0 0 12px rgba(6, 182, 212, 0.1);
+}
+
+.topology-sector.sector-cleared {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.sector-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.sector-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 110px;
+  text-align: center;
+}
+
+.ribosome-graphic-symbol,
+.translocon-gate-symbol,
+.chaperone-scanner-symbol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
+.sector-icon {
+  font-size: 1.6rem;
+}
+
+.transit-tubule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 1.4rem;
+  font-weight: 800;
+  user-select: none;
+}
+
+.transit-tubule.tubule-lit {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 12px rgba(6, 182, 212, 0.8);
+  animation: pulseGlow 1.5s infinite ease-in-out;
+}
+
+/* Ficha del Cargamento Proteico en Tránsito */
+.protein-cargo-token {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--accent-cyan);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.65rem;
+  width: 100%;
+  box-shadow: 0 4px 14px rgba(6, 182, 212, 0.25);
+  animation: popIn 0.3s ease;
+}
+
+.cargo-dot {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.cargo-meta {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 0.15rem;
+}
+
+.cargo-meta strong {
+  font-size: 0.78rem;
+  color: #fff;
+}
+
+.badge-signal-seq,
+.badge-translocating,
+.badge-folding-eval {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+
+.badge-signal-seq {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.badge-translocating {
+  background: rgba(139, 92, 246, 0.18);
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+}
+
+.badge-folding-eval {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.cleared-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-md);
+}
+
+.sector-idle-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Bifurcación de Rutas (COP II vs ERAD) */
+.bifurcation-routes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.route-channel {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.route-channel.channel-active {
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+}
+
+.route-channel.channel-cop2.channel-active {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.route-channel.channel-erad.channel-active {
+  border-color: #f43f5e;
+  background: rgba(244, 63, 94, 0.12);
+}
+
+.route-channel.channel-cleared {
+  opacity: 0.65;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.channel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: #fff;
+}
+
+.channel-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin: 0.25rem 0 0.35rem;
+  line-height: 1.35;
+}
+
+.route-passed-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #a7f3d0;
+}
+
+/* Consola de Actuadores y Conmutadores de Ruta */
+.traffic-actuator-console {
+  padding: 1.25rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-glass);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(7, 11, 20, 0.98));
+}
+
+.actuator-stage-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.actuator-panel-header .panel-step-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.actuator-panel-header h4 {
+  font-size: 1.05rem;
+  color: #fff;
+  margin: 0 0 0.3rem;
+}
+
+.actuator-panel-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.route-switches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.85rem;
+}
+
+.btn-route-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.15rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 60px;
+}
+
+.btn-route-switch:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.btn-route-switch:active {
+  transform: scale(0.98);
+}
+
+.switch-shortcut {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.switch-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.switch-content strong {
+  font-size: 0.88rem;
+  color: #fff;
+}
+
+.switch-content small {
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.35;
+}
+
+.switch-option {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass);
+}
+
+.switch-option:hover {
+  border-color: rgba(6, 182, 212, 0.6);
+  background: rgba(30, 41, 59, 0.9);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.switch-primary {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(14, 165, 233, 0.35));
+  border: 1px solid var(--accent-cyan);
+}
+
+.switch-primary:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.4);
+}
+
+.switch-success {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.35));
+  border: 1px solid #10b981;
+}
+
+.switch-success:hover {
+  border-color: #34d399;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+}
+
+.switch-warning {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(217, 119, 6, 0.35));
+  border: 1px solid #f59e0b;
+}
+
+.switch-warning:hover {
+  border-color: #fbbf24;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
+}
+
+.switch-danger {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(190, 18, 60, 0.25));
+  border: 1px solid rgba(244, 63, 94, 0.4);
+}
+
+.switch-danger:hover {
+  border-color: #f43f5e;
+  box-shadow: 0 0 16px rgba(244, 63, 94, 0.35);
+}
+
+/* Callout de Feedback de Nivel 4 */
+.lvl4-feedback-box {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+}
+
+.lvl4-feedback-box.success-callout {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #a7f3d0;
+}
+
+.lvl4-feedback-box.error-callout {
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  color: #fecdd3;
+}
+
+/* Reglas Responsivas */
+@media (max-width: 768px) {
+  .route-switches-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cellular-traffic-board {
+    padding: 1rem 0.75rem;
+  }
+
+  .map-topology-grid {
+    padding-bottom: 0.5rem;
+  }
+
+  .topology-sector {
+    min-width: 155px;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .btn-route-switch {
+    padding: 0.8rem 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .topology-sector {
+    min-width: 145px;
+  }
+
+  .switch-content strong {
+    font-size: 0.84rem;
+  }
+
+  .switch-content small {
+    font-size: 0.7rem;
+  }
+}
+
+.lvl5-feedback-box {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ==========================================================================
+   NIVEL 5: ALINEAMIENTO GENÓMICO Y DIAGNÓSTICO MOLECULAR
+   ========================================================================== */
+
+/* FASE 2: ENSAMBLADOR DE CODÓN ARNm */
+.mrna-slots-assembly-bay {
+  background: rgba(10, 16, 30, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-align: center;
+  margin: 1.25rem 0;
+}
+
+.source-dna-codon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  margin-bottom: 0.5rem;
+}
+
+.source-dna-codon-box strong {
+  color: #f43f5e;
+  font-size: 1.15rem;
+}
+
+.transcription-arrow-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-cyan);
+  margin-bottom: 1rem;
+}
+
+.mrna-codon-slots-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.mrna-tag-end {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.mrna-slot-box {
+  width: 54px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.slot-base {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.slot-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.slot-filled {
+  border: 1px solid #10b981 !important;
+  background: rgba(16, 185, 129, 0.2) !important;
+}
+
+.codon-decoded-callout {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* FASE 3: MESA DE DICTAMEN MÉDICO */
+.medical-dossier-board {
+  background: rgba(10, 16, 30, 0.9);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0;
+}
+
+.dossier-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.dossier-id-tag {
+  color: #f43f5e;
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.dossier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.dossier-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.entry-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.target-placeholder {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.dossier-slotted {
+  border: 1px solid #10b981 !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+}
+
+.slotted-content {
+  color: #a7f3d0;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.clinical-dossier {
+  border-left: 4px solid var(--accent-cyan);
+}
+
+.dossier-stamp {
+  background: rgba(244, 63, 94, 0.2);
+  border: 1px solid #f43f5e;
+  color: #fda4af;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+.genomic-alignment-box {
+  background: rgba(10, 16, 30, 0.9);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.alignment-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: max-content;
+}
+
+.seq-row-label {
+  width: 140px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge-seq-wt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.badge-seq-pat {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #f43f5e;
+}
+
+.polarity-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.bases-track {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.base-cell {
+  width: 38px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+}
+
+.base-interactive {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.base-interactive:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.15);
+  transform: translateY(-2px);
+}
+
+.base-pos {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+}
+
+.base-letter {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.base-A { color: #06b6d4; }
+.base-T { color: #f43f5e; }
+.base-C { color: #f59e0b; }
+.base-G { color: #10b981; }
+
+.selected-mutation {
+  border-color: #f43f5e !important;
+  background: rgba(244, 63, 94, 0.25) !important;
+  box-shadow: 0 0 14px rgba(244, 63, 94, 0.6);
+  animation: pulseRose 1.5s infinite;
+}
+
+.alignment-divider {
+  display: flex;
+  gap: 0.35rem;
+  margin-left: 148px;
+  padding: 0.2rem 0;
+  min-width: max-content;
+}
+
+.divider-indicator {
+  width: 38px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.divider-mismatch {
+  color: #f43f5e;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.codon-transcribe-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  background: rgba(10, 16, 30, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+  flex-wrap: wrap;
+}
+
+.mrna-target-socket {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(6, 182, 212, 0.15);
+  border: 2px dashed var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.clinical-case-box {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-top: 0.75rem;
+}
+
+/* Disclaimer Didáctico Ficticio */
+.fictional-case-disclaimer {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.95rem;
+  margin-bottom: 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #fef3c7;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.disclaimer-badge {
+  background: #f59e0b;
+  color: #0f172a;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* Tarjeta de Evidencia Registrada */
+.evidence-registered-card {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(15, 23, 42, 0.9) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.45);
+  border-left: 4px solid var(--accent-cyan);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.ev-card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.ev-card-highlight {
+  font-size: 0.92rem;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.ev-card-body p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+/* Visor del Código Genético (Lens) */
+.genetic-code-lens-card {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+}
+
+.lens-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #c084fc;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.85rem;
+}
+
+.lens-content-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.lens-triplet-card {
+  background: rgba(10, 16, 30, 0.9);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  min-width: 170px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.triplet-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  align-self: center;
+}
+
+.badge-wt {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-mut {
+  background: rgba(244, 63, 94, 0.15);
+  color: #fda4af;
+  border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.triplet-formula {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.triplet-translation {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.triplet-nature {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.lens-comparator-arrow {
+  font-size: 1.4rem;
+  color: var(--accent-cyan);
+}
+
+.triplet-card-mutant {
+  border-color: rgba(244, 63, 94, 0.6);
+  background: rgba(244, 63, 94, 0.1);
+  box-shadow: 0 0 16px rgba(244, 63, 94, 0.25);
+}
+
+/* Tablero de Investigación y Deducción Causal (Pinboard) */
+.pinboard-board {
+  background: radial-gradient(ellipse at top, rgba(15, 23, 42, 0.98), rgba(7, 11, 20, 0.99));
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+.pinboard-flow-container {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.pinboard-station {
+  flex: 1;
+  min-width: 210px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  position: relative;
+}
+
+.station-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.station-pin {
+  font-size: 1rem;
+}
+
+.pinboard-slot {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 0.65rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  background: rgba(10, 16, 30, 0.6);
+}
+
+.pinboard-slot:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.08);
+}
+
+.pinboard-path-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.25rem;
+}
+
+.connector-arrow {
+  color: var(--accent-cyan);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.connector-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .pinboard-flow-container {
+    flex-direction: column;
+  }
+  .pinboard-path-connector {
+    transform: rotate(90deg);
+    margin: 0.35rem 0;
+  }
+}
+
+.case-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.4rem;
+}
+
+.case-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+/* ==========================================================================
+   BANNER DE CERTIFICADO Y MODAL DE CERTIFICADO MÉDICO
+   ========================================================================== */
+
+.final-cert-banner {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 1rem;
+}
+
+.cert-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cert-banner-icon {
+  font-size: 2.5rem;
+}
+
+.cert-banner-text h4 {
+  margin: 0 0 0.25rem;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.cert-banner-text p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* Certificado Modal */
+.medical-cert-wrapper {
+  padding: 0.5rem;
+}
+
+.cert-outer-frame {
+  border: 2px solid rgba(6, 182, 212, 0.5);
+  outline: 4px solid rgba(139, 92, 246, 0.3);
+  outline-offset: 4px;
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.5rem;
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(7, 11, 20, 0.98));
+}
+
+.cert-header-block {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.cert-republic-seal {
+  font-size: 2.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.cert-dept-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-cyan);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cert-title {
+  font-size: 1.4rem;
+  color: #fff;
+  margin: 0.5rem 0 0.25rem;
+  letter-spacing: 0.05em;
+}
+
+.cert-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.cert-conferred-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: center;
+  color: #cbd5e1;
+  max-width: 620px;
+  margin: 0 auto 1.5rem;
+}
+
+.cert-score-breakdown {
+  margin: 1.25rem 0;
+  overflow-x: auto;
+}
+
+.cert-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.cert-table th {
+  text-align: left;
+  padding: 0.5rem;
+  color: var(--accent-cyan);
+  border-bottom: 1px solid var(--border-glass);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.cert-table td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+}
+
+.cert-table .score-col {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.cert-total-row td {
+  border-top: 2px solid var(--border-glass);
+  border-bottom: none;
+  padding-top: 0.75rem;
+}
+
+.score-total {
+  color: var(--accent-cyan);
+  font-size: 1.15rem;
+}
+
+.cert-signature-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border-glass);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cert-sig-box {
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+}
+
+.sig-line {
+  width: 120px;
+  height: 1px;
+  background: var(--text-muted);
+  margin: 0 auto 0.4rem;
+}
+
+.sig-title {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.cert-seal-badge {
+  flex-shrink: 0;
+}
+
+.seal-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  border: 2px dashed #f59e0b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #f59e0b;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  line-height: 1.1;
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.seal-circle strong {
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE ADAPTATIONS (360px, 390px, 430px, 768px, 1024px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .lvl2-options-grid {
+    grid-template-columns: 1fr;
+  }
+  .ribosome-sites-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .site-chamber {
+    min-height: 60px;
+  }
+  .trna-cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+  .splicing-strand-wrap {
+    flex-direction: column;
+  }
+  .splice-segment {
+    min-width: 100%;
+  }
+  .compartments-map-layout {
+    flex-direction: column;
+  }
+  .circuit-arrow {
+    transform: rotate(90deg);
+    padding: 0.5rem 0;
+  }
+  .cell-zone {
+    min-width: 100%;
+  }
+  .dossier-grid {
+    grid-template-columns: 1fr;
+  }
+  .mol-tools-grid {
+    grid-template-columns: 1fr;
+  }
+  .mrna-codon-slots-row {
+    gap: 0.4rem;
+  }
+  .mrna-slot-box {
+    width: 48px;
+    height: 58px;
+  }
+  .transesterification-workspace {
+    flex-direction: column;
+  }
+  .surgery-tools-grid {
+    grid-template-columns: 1fr;
+  }
+  .aberrant-options-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .lvl2-step-tab,
+  .lvl4-station-tab,
+  .lvl5-phase-tab {
+    min-width: 100%;
+    font-size: 0.78rem;
+  }
+  .cert-outer-frame {
+    padding: 1rem 0.75rem;
+  }
+  .cert-signature-row {
+    flex-direction: column;
+  }
+  .base-cell {
+    width: 32px;
+    height: 44px;
+  }
+  .base-letter {
+    font-size: 0.95rem;
+  }
+  .cargo-item-token {
+    padding: 0.6rem 0.75rem;
+  }
+  .tool-token-info strong {
+    font-size: 0.82rem;
+  }
+  .tool-token-info small {
+    font-size: 0.7rem;
+  }
+  .surgery-tool-btn {
+    padding: 0.6rem 0.75rem;
+  }
+  .tool-details strong {
+    font-size: 0.82rem;
+  }
+  .tool-details small {
+    font-size: 0.7rem;
   }
 }

@@ -116,6 +116,25 @@ class AudioManager {
     this._playTone(660, 'sine', 0.15, 0.12);
     setTimeout(() => this._playTone(880, 'sine', 0.25, 0.12), 100);
   }
+
+  // Ensamblaje molecular correcto (acople de reactivos, cap, snRNP, etc.)
+  playAssemble() {
+    this._playTone(523.25, 'triangle', 0.12, 0.18);
+    setTimeout(() => this._playTone(783.99, 'sine', 0.18, 0.2), 60);
+  }
+
+  // Alias para compatibilidad de controladores
+  playCorrect(baseIndex = 0) {
+    this.playMatch(baseIndex);
+  }
+
+  playMistake() {
+    this.playError();
+  }
+
+  playSuccess() {
+    this.playLevelComplete();
+  }
 }
 
 // Instancia global

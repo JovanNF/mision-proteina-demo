@@ -2,6 +2,8 @@
 server.js
 tests/
 *.log
+*.zip
+planificacion/
 .DS_Store
 Thumbs.db
 node_modules/
