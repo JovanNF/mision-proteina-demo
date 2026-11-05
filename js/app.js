@@ -416,7 +416,7 @@ class AppController {
 
           <div class="cert-body-block">
             <p class="cert-conferred-text">
-              Por haber completado con excelencia científica las cinco fases cardinales del flujo de la información genética celular y la resolución pericial del <strong>Caso Didáctico 042-B</strong> en el videojuego educativo <em>Misión Proteína: Código de Vida</em>, demostrando dominio de los fundamentos de <strong>Bioquímica</strong>.
+              Por haber completado con excelencia científica las cinco fases cardinales del flujo de la información genética celular y la resolución pericial del <strong>Caso Didáctico 042-B</strong> en el videojuego educativo <em>Misión Proteína: Código de Vida</em>.
             </p>
 
             <!-- Desglose de puntuaciones por fase -->
