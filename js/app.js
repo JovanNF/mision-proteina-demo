@@ -409,14 +409,14 @@ class AppController {
         <div class="cert-outer-frame">
           <div class="cert-header-block">
             <div class="cert-republic-seal">🧬</div>
-            <span class="cert-dept-tag">CENTRO DE INVESTIGACIÓN EN BIOLOGÍA MOLECULAR Y DOGMA CENTRAL</span>
+            <span class="cert-dept-tag">MATERIA: BIOQUÍMICA · BIOLOGÍA MOLECULAR Y DOGMA CENTRAL</span>
             <h3 class="cert-title">CERTIFICADO DE FINALIZACIÓN — MISIÓN PROTEÍNA</h3>
-            <p class="cert-subtitle">Certificado de finalización — Misión Proteína</p>
+            <p class="cert-subtitle">Certificado de finalización — Misión Proteína · Bioquímica</p>
           </div>
 
           <div class="cert-body-block">
             <p class="cert-conferred-text">
-              Por haber completado con excelencia científica las cinco fases cardinales del flujo de la información genética celular y la resolución pericial del <strong>Caso Didáctico 042-B</strong> en el simulador <em>Misión Proteína: Código de Vida</em>.
+              Por haber completado con excelencia científica las cinco fases cardinales del flujo de la información genética celular y la resolución pericial del <strong>Caso Didáctico 042-B</strong> en el videojuego educativo <em>Misión Proteína: Código de Vida</em>, demostrando dominio de los fundamentos de <strong>Bioquímica</strong>.
             </p>
 
             <!-- Desglose de puntuaciones por fase -->
